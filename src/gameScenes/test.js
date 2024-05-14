@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 
+
 class Example extends Phaser.Scene {
 	preload() {
 		this.load.setBaseURL("https://labs.phaser.io");
