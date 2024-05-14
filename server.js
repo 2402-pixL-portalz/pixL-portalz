@@ -2,6 +2,7 @@ require(`dotenv/config`);
 const express = require(`express`);
 const morgan = require(`morgan`);
 
+
 const app = express();
 
 // various middleware
@@ -22,7 +23,7 @@ app.use((req, _, next) => {
 app.use(`/api/v1/levels`, require(`./api/levels.js`));
 
 // route to authentication
-app.use(`/auth/v1/auth`, require(`./auth/auth.js`));
+app.use(`/api/v1/auth`, require(`./auth/auth.js`));
 
 // serving front-end for user
 for (const path of ["/"]) {
