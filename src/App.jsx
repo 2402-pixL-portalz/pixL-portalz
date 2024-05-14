@@ -2,7 +2,6 @@ import Game from "./components/Game";
 import Navbar from "./components/Navbar";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import { useParams } from "react-router-dom";
 
 import { Route, Routes } from "react-router-dom";
 
