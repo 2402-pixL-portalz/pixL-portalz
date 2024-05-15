@@ -1,6 +1,6 @@
 
 import Test1 from "../gameScenes/levelOne.js"; 
-import mC from "../assets/character/pixilart-drawing.png"
+import mC from "../assets/images/character/pixilart-drawing.png"
 import Example from "../gameScenes/test.js";
 import Phaser from "phaser";
 
