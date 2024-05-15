@@ -28,3 +28,4 @@ class Test1 extends Phaser.Scene {
 }
 
 export default Test1;
+
