@@ -20,7 +20,27 @@ const Platform = (level) => {
   
   //returns a statement to preload
   level.load.image("platform", platformImg);
+  return level.physics.add.staticGroup();
+}
+
+const createPlatform = (platform,[xPosition,yPosition],[lengthScale, heightScale]) => {
+
+  platform.create(xPosition, yPosition, "platform").setScale(lengthScale, heightScale).refreshBody();
+
+  return platform;
+	
 
 }
 
+const platformObject = (level) => {
+
+  return level.physics.add.staticGroup();
+}
+
+
+
+
+
 export default Platform;
+
+export{createPlatform, platformObject}

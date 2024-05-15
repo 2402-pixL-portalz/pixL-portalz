@@ -5,6 +5,7 @@ import verycool from "../assets/images/character/verycool.png";
 import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
 import Platform from "../assets/objects/platforms/platform";
+import { createPlatform, platformObject} from "../assets/objects/platforms/platform";
 
 
 
@@ -12,6 +13,7 @@ class Test1 extends Phaser.Scene {
 	constructor() {
 		super(`Test1`);
 		playerVars(this);
+
 	}
 	preload() {
 		this.load.image(`player`, verycool);
@@ -22,7 +24,7 @@ class Test1 extends Phaser.Scene {
 
 	create() {
 		//declarations
-		const platforms = this.physics.add.staticGroup();
+		const platforms = platformObject(this);
 
 		//player
 		this.player = this.physics.add.image(200, 200, `player`);
@@ -32,10 +34,10 @@ class Test1 extends Phaser.Scene {
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 
 		//platforms
-		platforms.create(550, 580, "platform").setScale(2,.6).refreshBody();
-		platforms.create(400, 300, "platform").setScale(2,2).refreshBody();	
-
-		this.physics.add.collider(this.player,platforms);
+		createPlatform(platforms,[500,550],[4,.6]);
+		createPlatform(platforms,[400,300],[4,.6]);
+		
+		this.physics.add.collider(this.player, platforms);
 	}
 
 	update() {
