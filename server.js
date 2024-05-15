@@ -2,6 +2,7 @@ require(`dotenv/config`);
 const express = require(`express`);
 const morgan = require(`morgan`);
 const { verifyToken } = require('./auth/authMiddleware.js');
+const levelRoutes = require('./api/levels.js');
 
 
 const app = express();
@@ -33,6 +34,8 @@ app.get('/api/v1/protected', verifyToken, (req, res) => {
 for (const path of ["/"]) {
 	app.use(path, express.static("dist"));
 }
+
+app.use(express.static('dist'));
 
 app.listen(process.env.PORT || 3000, () => {
 	console.log("LISTENING ON PORT", process.env.PORT);

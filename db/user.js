@@ -10,12 +10,20 @@ const registerUser = async (username, password) => {
     data: {
       username,
       password: hashedPassword,
+      levels: {
+        create: [
+          {  isCompleted: false, achievements: 0},
+          {  isCompleted: false, achievements: 0},
+          {  isCompleted: false, achievements: 0},
+
+        ]
+      }
     },
   });
   const token = jwt.sign(
     { userId: newUser.id, username: newUser.username },
     process.env.JWT_SECRET,
-    { expiresIn: '24h'}
+    { expiresIn: '1w'}
   );
   return { user: { id: newUser.id, username: newUser.username }, token };
 };
