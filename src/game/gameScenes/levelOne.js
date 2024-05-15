@@ -4,6 +4,8 @@ import mC from "../assets/images/character/pixilart-drawing.png";
 import verycool from "../assets/images/character/verycool.png";
 import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
+import Platform from "../assets/objects/platforms/platform";
+
 
 
 class Test1 extends Phaser.Scene {
@@ -12,22 +14,28 @@ class Test1 extends Phaser.Scene {
 		playerVars(this);
 	}
 	preload() {
-
-
-	create() {
-		this.add.image(400, 300, "platform")
-		this.add.image();
-=======
 		this.load.image(`player`, verycool);
+		Platform(this);
 	}
 
+
+
 	create() {
+		//declarations
+		const platforms = this.physics.add.staticGroup();
+
+		//player
 		this.player = this.physics.add.image(200, 200, `player`);
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
-
+	
+		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 
-		this.player.setCollideWorldBounds(true);
+		//platforms
+		platforms.create(550, 580, "platform").setScale(2,.6).refreshBody();
+		platforms.create(400, 300, "platform").setScale(2,2).refreshBody();	
+
+		this.physics.add.collider(this.player,platforms);
 	}
 
 	update() {

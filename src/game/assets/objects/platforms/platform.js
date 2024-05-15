@@ -19,7 +19,7 @@ import platformImg from "../../images/platforms/platform.png";
 const Platform = (level) => {
   
   //returns a statement to preload
-  return level.load.image("platform", platformImg);
+  level.load.image("platform", platformImg);
 
 }
 
