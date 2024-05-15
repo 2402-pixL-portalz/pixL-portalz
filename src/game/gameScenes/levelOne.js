@@ -4,8 +4,8 @@ import mC from "../assets/images/character/pixilart-drawing.png";
 import verycool from "../assets/images/character/verycool.png";
 import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
-import Platform from "../assets/objects/platforms/platform";
-import { createPlatform, platformObject} from "../assets/objects/platforms/platform";
+import { createPlatform, platformObject, platformLoad} from "../assets/objects/platforms/platform";
+import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objects/exit/exit";
 
 
 
@@ -13,11 +13,12 @@ class Test1 extends Phaser.Scene {
 	constructor() {
 		super(`Test1`);
 		playerVars(this);
-
 	}
+
 	preload() {
 		this.load.image(`player`, verycool);
-		Platform(this);
+		platformLoad(this);
+		exitLoad(this);
 	}
 
 
@@ -25,19 +26,27 @@ class Test1 extends Phaser.Scene {
 	create() {
 		//declarations
 		const platforms = platformObject(this);
+		const exit = exitObject(this);
+
+		//exit
+		createExit(exit, [700,420],[2,2]);
+
 
 		//player
-		this.player = this.physics.add.image(200, 200, `player`);
+		this.player = this.physics.add.image(100, 500, `player`).setScale(.5,.5);
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 	
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 
 		//platforms
-		createPlatform(platforms,[500,550],[4,.6]);
-		createPlatform(platforms,[400,300],[4,.6]);
-		
+		createPlatform(platforms,[420,550],[2,.6]);
+		createPlatform(platforms,[700,500],[2,.6]);
+
 		this.physics.add.collider(this.player, platforms);
+		this.physics.add.overlap(this.player, exit, ()=>{goThroughExit(this, "Example")});
+
+		
 	}
 
 	update() {
