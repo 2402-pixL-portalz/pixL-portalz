@@ -1,6 +1,8 @@
 require(`dotenv/config`);
 const express = require(`express`);
 const morgan = require(`morgan`);
+const { verifyToken } = require('./auth/authMiddleware.js');
+
 
 const app = express();
 
@@ -22,8 +24,11 @@ app.use((req, _, next) => {
 app.use(`/api/v1/levels`, require(`./api/levels.js`));
 
 // route to authentication
-app.use(`/auth/v1/auth`, require(`./auth/auth.js`));
+app.use(`/api/v1/auth`, require(`./auth/auth.js`));
 
+app.get('/api/v1/protected', verifyToken, (req, res) => {
+	res.send('This is a protected route only accessible with valid token.');
+});
 // serving front-end for user
 for (const path of ["/"]) {
 	app.use(path, express.static("dist"));
