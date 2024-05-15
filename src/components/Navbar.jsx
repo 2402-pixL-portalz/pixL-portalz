@@ -1,33 +1,39 @@
 import { useNavigate } from "react-router-dom";
-const Navbar = () => {
+const Navbar = ({ game }) => {
+	const navigate = useNavigate();
+	return (
+		<>
+			<nav className="nav">
+				<h3>very cool game title</h3>
 
-  const navigate = useNavigate();
-  return (
-    <>
+				<button
+					onClick={() => {
+						navigate("/");
+					}}
+				>
+					Home
+				</button>
 
-      <nav className="nav">
-        <h3>very cool game title</h3>
+				<button
+					onClick={() => {
+						game.deleteGame();
+						navigate("/Login");
+					}}
+				>
+					Login
+				</button>
 
-        <button onClick={() => {
-          navigate("/");
-          //create game
-        }}>Home</button>
-
-        <button onClick={() => {
-          navigate("/Login");
-          //destroy game
-        }}>Login</button>
-
-        <button onClick={() => {
-          navigate("/Register");
-          //destroy game
-        }}>Register</button>
-
-      </nav>
-    </>
-  );
-
-
-}
+				<button
+					onClick={() => {
+						game.deleteGame();
+						navigate("/Register");
+					}}
+				>
+					Register
+				</button>
+			</nav>
+		</>
+	);
+};
 
 export default Navbar;
