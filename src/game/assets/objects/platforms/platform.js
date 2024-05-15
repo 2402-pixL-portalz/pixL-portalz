@@ -1,7 +1,7 @@
 import platformImg from "../../images/platforms/platform.png";
 
 //takes in "this" from the scene it is called in
-const Platform = (level) => {
+const platformLoad = (level) => {
   
   //runs a statement to preload
   level.load.image("platform", platformImg);
@@ -23,7 +23,4 @@ const createPlatform = (platform,[xPosition,yPosition],[lengthScale, heightScale
 
 
 
-
-export default Platform;
-
-export{createPlatform, platformObject}
+export{createPlatform, platformObject, platformLoad}

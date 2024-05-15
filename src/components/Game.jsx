@@ -10,7 +10,7 @@ const Game = () => {
 		type: Phaser.AUTO,
 		width: 800,
 		height: 600,
-		scene: Test1,
+		scene: [Test1,Example],
 		physics: {
 			default: "arcade",
 			arcade: {
