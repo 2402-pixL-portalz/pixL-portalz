@@ -29,7 +29,7 @@ class Test1 extends Phaser.Scene {
 		const exit = exitObject(this);
 
 		//exit
-		createExit(exit, [700,420],[2,2]);
+		createExit(exit, [100,620],[2,2]);
 
 
 		//player
@@ -44,7 +44,7 @@ class Test1 extends Phaser.Scene {
 		createPlatform(platforms,[700,500],[2,.6]);
 
 		this.physics.add.collider(this.player, platforms);
-		this.physics.add.overlap(this.player, exit, ()=>{goThroughExit(this, "Example")});
+		this.physics.add.overlap(this.player, exit, ()=>{goThroughExit(this, "Level Select")});
 
 		
 	}
