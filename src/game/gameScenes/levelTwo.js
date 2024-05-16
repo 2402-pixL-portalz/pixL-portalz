@@ -5,25 +5,21 @@ import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../assets/objects/platforms/platform";
 import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objects/exit/exit";
-import levelOneBg from "../assets/images/backgrounds/level.jpg"
-import jumpInst from "../assets/images/instructions/toJump.png";
-import moveInst from "../assets/images/instructions/toMove.png";
+import levelTwoBg from "../assets/images/backgrounds/level2.jpg";
 
 
-
-class Test1 extends Phaser.Scene {
+class LevelTwo extends Phaser.Scene {
 	constructor() {
-		super(`Test1`);
+		super(`LevelTwo`);
 		playerVars(this);
 	}
 
 	preload() {
 		this.load.image(`player`, mC);
-		this.load.image("bg", levelOneBg);
-		this.load.image("jump instructions", jumpInst);
-		this.load.image("move instructions", moveInst)
-		platformLoad(this);
+    this.load.image("bg", levelTwoBg);
 		exitLoad(this);
+    platformLoad(this);
+
 	}
 
 
@@ -34,16 +30,12 @@ class Test1 extends Phaser.Scene {
 		const exit = exitObject(this);
 
 		//background
-		
 		const bg = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "bg");
-		bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
-
-		//instructions
-		this.add.image(400,700,"jump instructions").setScale(1.3,1.3);
-		this.add.image(100,700, "move instructions").setScale(1.3,1.3);
+    bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
+		
 
 		//exit
-		createExit(exit, [700, 655], [1, 1]);
+		
 
 
 		//player
@@ -54,9 +46,9 @@ class Test1 extends Phaser.Scene {
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 
 		//platforms
-		createPlatform(platforms, [420, 750], [2, .6]);
-		createPlatform(platforms, [700, 700], [2, .6]);
+	
 
+    //interacts
 		this.physics.add.collider(this.player, platforms);
 		this.physics.add.overlap(this.player, exit, () => { goThroughExit(this, "Level Select") });
 
@@ -69,5 +61,4 @@ class Test1 extends Phaser.Scene {
 	}
 }
 
-export default Test1;
-
+export default LevelTwo;
