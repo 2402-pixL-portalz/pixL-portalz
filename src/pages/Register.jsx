@@ -28,7 +28,7 @@ const Register = () => {
      
       const userData = await result.json()
       if (userData.token) {
-        sessionStorage.setItem('token', userData.token)
+        localStorage.setItem('token', userData.token)
         
         navigate('/')
       } else {
