@@ -3,7 +3,6 @@ const express = require(`express`);
 const morgan = require(`morgan`);
 const { verifyToken } = require('./auth/authMiddleware.js');
 
-
 const app = express();
 
 // various middleware
