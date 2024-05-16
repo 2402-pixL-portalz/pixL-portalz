@@ -12,8 +12,8 @@ class Game {
 		if (this.game === null) {
 			const config = {
 				type: Phaser.AUTO,
-				width: 800,
-				height: 600,
+				width: 1600,
+				height: 800,
 				scene: [Test1, LevelSelect],
 				physics: {
 					default: "arcade",
