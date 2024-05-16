@@ -1,4 +1,4 @@
-import Test1 from "../game/gameScenes/levelOne.js";
+import LevelOne from "../game/gameScenes/levelOne.js";
 import LevelSelect from "../game/gameScenes/levelSelect.js";
 import LevelTwo from "../game/gameScenes/levelTwo.js";
 import Phaser from "phaser";
@@ -14,7 +14,7 @@ class Game {
 				type: Phaser.AUTO,
 				width: 1600,
 				height: 800,
-				scene: [LevelSelect, Test1, LevelTwo],
+				scene: [LevelSelect, LevelOne, LevelTwo],
 				physics: {
 					default: "arcade",
 					arcade: {

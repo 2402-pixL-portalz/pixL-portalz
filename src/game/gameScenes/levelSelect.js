@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import verycool from "../assets/images/character/verycool.png";
+import mC from "../assets/images/character/pixilart-drawing.png"
 import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
 import { createExit, exitLoad, exitObject } from "../assets/objects/exit/exit";
@@ -13,7 +13,7 @@ class LevelSelect extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.image(`player`, verycool);
+		this.load.image(`player`, mC);
 		exitLoad(this);
 
 		this.load.image(`day`, dayImage);

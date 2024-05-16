@@ -11,7 +11,7 @@ import moveInst from "../assets/images/instructions/toMove.png";
 
 
 
-class Test1 extends Phaser.Scene {
+class LevelOne extends Phaser.Scene {
 	constructor() {
 		super(`Test1`);
 		playerVars(this);
@@ -69,5 +69,5 @@ class Test1 extends Phaser.Scene {
 	}
 }
 
-export default Test1;
+export default LevelOne;
 
