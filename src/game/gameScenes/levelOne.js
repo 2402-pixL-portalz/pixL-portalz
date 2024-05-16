@@ -39,11 +39,11 @@ class Test1 extends Phaser.Scene {
 		bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
 		//instructions
-		this.add.image(400,500,"jump instructions").setScale(1.3,1.3);
-		this.add.image(100,500, "move instructions").setScale(1.3,1.3);
+		this.add.image(400,700,"jump instructions").setScale(1.3,1.3);
+		this.add.image(100,700, "move instructions").setScale(1.3,1.3);
 
 		//exit
-		createExit(exit, [700, 455], [1, 1]);
+		createExit(exit, [700, 655], [1, 1]);
 
 
 		//player
@@ -54,8 +54,8 @@ class Test1 extends Phaser.Scene {
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 
 		//platforms
-		createPlatform(platforms, [420, 550], [2, .6]);
-		createPlatform(platforms, [700, 500], [2, .6]);
+		createPlatform(platforms, [420, 750], [2, .6]);
+		createPlatform(platforms, [700, 700], [2, .6]);
 
 		this.physics.add.collider(this.player, platforms);
 		this.physics.add.overlap(this.player, exit, () => { goThroughExit(this, "Level Select") });
