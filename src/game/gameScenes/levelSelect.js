@@ -35,7 +35,7 @@ class LevelSelect extends Phaser.Scene {
 		createExit(this.exit, [100, 570], [1, 1]);
 
 		//player
-		this.player = this.physics.add.image(100, 500, `player`).setScale(0.5, 0.5);
+		this.player = this.physics.add.image(100, 500, `player`).setScale(1.6, 1.6);
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
 		this.player.setCollideWorldBounds(true);

@@ -47,7 +47,7 @@ class LevelOne extends Phaser.Scene {
 
 
 		//player
-		this.player = this.physics.add.image(100, 580, `player`).setScale(1, 1);
+		this.player = this.physics.add.image(100, 580, `player`).setScale(1.6, 1.6);
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
 		this.player.setCollideWorldBounds(true);
