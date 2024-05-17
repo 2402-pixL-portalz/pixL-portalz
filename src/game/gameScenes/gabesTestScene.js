@@ -5,7 +5,8 @@ import playerControls from "../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../assets/objects/platforms/platform";
 import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objects/exit/exit";
 import levelTwoBg from "../assets/images/backgrounds/level2.jpg";
-
+import testSprite from "../assets/spritesheets/character/spritesheet.png";
+import idleAnimation from "../assets/spritesheets/character/idleStickman.png";
 
 class GabeScene extends Phaser.Scene {
 	constructor() {
@@ -14,8 +15,17 @@ class GabeScene extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.image(`player`, mC);
+		this.load.spritesheet(`playerIdle`, idleAnimation, {
+      frameWidth: 92,
+      frameHeight: 112
+    });
     this.load.image("bg", levelTwoBg);
+
+    this.load.spritesheet("spritesheet", testSprite, {
+      frameWidth: 35,
+      frameHeight: 35
+    });
+
 		exitLoad(this);
     platformLoad(this);
 
@@ -33,18 +43,45 @@ class GabeScene extends Phaser.Scene {
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 		
 
-		//exit
+		
 		
 
 
 		//player
-    this.player = this.physics.add.image(100, 580, `player`).setScale(1.6, 1.6);
+    this.player = this.physics.add.sprite(300,300, "playerIdle").setScale(1,1);
+
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 
+
 		//platforms
+
+    //animations
+    this.testSprite = this.add.sprite(100,100,"spritesheet").setScale(20,20);
+
+
+    this.anims.create({
+      key: "testAnim",
+      frames: this.anims.generateFrameNumbers("spritesheet"),
+      frameRate: 1,
+      repeat: -1
+    })
+
+    this.testSprite.play("testAnim");
+
+    this.anims.create({
+      key: "idleAnim",
+      frames: this.anims.generateFrameNumbers("playerIdle"),
+      frameRate: 3,
+      repeat: -1
+    })
+
+    this.player.play("idleAnim");
+    
+
+
 	
 
     //interacts
