@@ -7,9 +7,9 @@ import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objec
 import levelTwoBg from "../assets/images/backgrounds/level2.jpg";
 
 
-class LevelTwo extends Phaser.Scene {
+class GabeScene extends Phaser.Scene {
 	constructor() {
-		super(`LevelTwo`);
+		super(`GabeScene`);
 		playerVars(this);
 	}
 
@@ -38,7 +38,7 @@ class LevelTwo extends Phaser.Scene {
 
 
 		//player
-		this.player = this.physics.add.image(100, 580, `player`).setScale(1.6, 1.6);
+    this.player = this.physics.add.image(100, 580, `player`).setScale(1.6, 1.6);
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
 		this.player.setCollideWorldBounds(true);
@@ -60,4 +60,4 @@ class LevelTwo extends Phaser.Scene {
 	}
 }
 
-export default LevelTwo;
+export default GabeScene;
