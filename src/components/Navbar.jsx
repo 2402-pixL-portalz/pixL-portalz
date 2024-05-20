@@ -3,23 +3,18 @@ const Navbar = ({ game }) => {
 	const navigate = useNavigate();
 	return (
 		<>
-      <header>
-        <img src="https://github.com/lucydelash/climbing-project/blob/main/PixL-portalZ-logo.png?raw=true"
-          alt="PixL portalZ"
-          width="1050" height="240">
-        </img>
-      </header>
-      
 			<nav className="nav">
-				<button class="button homeButton"
+				<h3>very cool game title</h3>
+
+				<button
 					onClick={() => {
 						navigate("/");
 					}}
 				>
 					Home
 				</button>
-        
-				<button class="button loginButton"
+
+				<button
 					onClick={() => {
 						game.deleteGame();
 						navigate("/Login");
@@ -28,7 +23,7 @@ const Navbar = ({ game }) => {
 					Login
 				</button>
 
-				<button class="button registerButton"
+				<button
 					onClick={() => {
 						game.deleteGame();
 						navigate("/Register");
