@@ -44,7 +44,7 @@ const Login = () => {
           required
         /><br/>
 
-        <label>Password</label><br/>
+        <label>Password:</label><br/>
         <input 
           value={password}
           type="password"
@@ -52,7 +52,9 @@ const Login = () => {
           required
         /><br/>
 
-        <button>Login</button>
+        <button class="button loginPageButton">
+          Login
+        </button>
       </form>
     </div>
   );
