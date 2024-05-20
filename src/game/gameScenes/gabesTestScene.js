@@ -4,9 +4,13 @@ import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../assets/objects/platforms/platform";
 import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objects/exit/exit";
-import levelTwoBg from "../assets/images/backgrounds/level2.jpg";
+import levelTwoBg from "../assets/images/backgrounds/white.png";
 import testSprite from "../assets/spritesheets/character/spritesheet.png";
-import idleAnimation from "../assets/spritesheets/character/idleStickman.png";
+// import idleAnimation from "../assets/spritesheets/dogwaterCharacter/badIdle.png";
+// import startRun from "../assets/spritesheets/dogwaterCharacter/badRunningAnimation.png";
+// import keepRunning from "../assets/spritesheets/dogwaterCharacter/badKeepRunning.png";
+
+import { playerAnimUpdate, playerAnimCreate, playerAnimPreload } from "../util functions/playerAnims";
 
 class GabeScene extends Phaser.Scene {
 	constructor() {
@@ -15,20 +19,29 @@ class GabeScene extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.spritesheet(`playerIdle`, idleAnimation, {
-      frameWidth: 92,
-      frameHeight: 112
-    });
+
+    playerAnimPreload(this);
+		// this.load.spritesheet(`startRun`, startRun, {
+    //   frameWidth: 32,
+    //   frameHeight: 32
+    // });
+    
+    // this.load.spritesheet("character", idleAnimation, {
+    //   frameWidth: 32,
+    //   frameHeight: 32
+    // })
+
+    // this.load.spritesheet("continueRunning", keepRunning, {
+    //   frameWidth: 32,
+    //   frameHeight: 32
+    // })
+    
+
     this.load.image("bg", levelTwoBg);
-
-    this.load.spritesheet("spritesheet", testSprite, {
-      frameWidth: 35,
-      frameHeight: 35
-    });
-
 		exitLoad(this);
     platformLoad(this);
-
+    // this.movingL = false;
+    // this.movingR = false;
 	}
 
 
@@ -44,11 +57,9 @@ class GabeScene extends Phaser.Scene {
 		
 
 		
-		
-
 
 		//player
-    this.player = this.physics.add.sprite(300,300, "playerIdle").setScale(1,1);
+    this.player = this.physics.add.sprite(300,300, "character").setScale(3,3);
 
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
@@ -59,26 +70,32 @@ class GabeScene extends Phaser.Scene {
 		//platforms
 
     //animations
-    this.testSprite = this.add.sprite(100,100,"spritesheet").setScale(20,20);
+   
+    playerAnimCreate(this);
+    // this.anims.create({
+    //   key: "idle",
+    //   frames: this.anims.generateFrameNumbers("character"),
+    //   frameRate: 2,
+    //   repeat: -1
+    // })
 
+    // this.anims.create({
+    //   key: "runStart",
+    //   frames: this.anims.generateFrameNumbers("startRun"),
+    //   frameRate: 15,
+    //   repeat: 0
+    // })
 
-    this.anims.create({
-      key: "testAnim",
-      frames: this.anims.generateFrameNumbers("spritesheet"),
-      frameRate: 1,
-      repeat: -1
-    })
+    // this.anims.create({
+    //   key: "keepRunning",
+    //   frames: this.anims.generateFrameNumbers("continueRunning"),
+    //   frameRate: 20,
+    //   repeat: -1
+    // })
 
-    this.testSprite.play("testAnim");
+    // this.player.play("idle");
+    
 
-    this.anims.create({
-      key: "idleAnim",
-      frames: this.anims.generateFrameNumbers("playerIdle"),
-      frameRate: 3,
-      repeat: -1
-    })
-
-    this.player.play("idleAnim");
     
 
 
@@ -91,9 +108,44 @@ class GabeScene extends Phaser.Scene {
 
 
 	}
-
+  
 	update() {
 		playerControls(this);
+    playerAnimUpdate(this);
+
+
+    // if ((this.player.body.velocity.x > 10) && this.movingR === false) {
+    //   this.player.play("runStart");
+    //   this.player.setScale(3,3)
+    //   this.player.setOffset(0,0);
+    //   this.movingR = true;
+    // }
+    // else if(this.player.body.velocity.x < 10 && this.movingR === true){
+    //   this.movingR = false;
+    //   this.player.stop("runStart");
+    //   this.player.play("idle"); 
+    // }
+    // else if(this.player.anims.currentAnim.key === "runStart" && this.player.anims.isPlaying === false){
+    //   this.player.play("keepRunning");
+    // }
+
+    
+    // if ((this.player.body.velocity.x < -10) && this.movingL === false) {
+    //   this.player.setScale(-3,3)
+    //   this.player.setOffset(32,0);
+    //   this.player.play("runStart");
+    //   this.movingL = true;
+    // }
+    // else if(this.player.body.velocity.x > -10 && this.movingL === true){
+    //   this.movingL = false;
+    //   this.player.stop("runStart");
+    //   this.player.play("idle"); 
+    // }
+    // else if(this.player.anims.currentAnim.key === "runStart" && this.player.anims.isPlaying === false){
+
+    //   this.player.play("keepRunning");
+    // }
+
 	}
 }
 
