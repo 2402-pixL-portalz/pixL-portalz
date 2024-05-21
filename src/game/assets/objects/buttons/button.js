@@ -24,7 +24,7 @@ const createButton = (This, x, y, xScale, yScale) => {
 };
 
 const addButtonOverlap = (This, button, objectsAllowedToOverlap) => {
-	This.physics.add.overlap(button, objectsAllowedToOverlap, (obj1, item) => {
+	This.physics.add.overlap(button, objectsAllowedToOverlap, () => {
 		if (!button.isPressed) {
 			button.isPressed = true;
 			button.setTexture(`activatedImage`);
