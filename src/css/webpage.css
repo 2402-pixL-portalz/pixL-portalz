@@ -4,9 +4,9 @@ html body {
   justify-content: center;
   background-image: url("https://rare-gallery.com/uploads/posts/4598949-artwork-simple-background-blue-stars-space-digital-art-space-art.jpg");
   background-size: 210%;
-  background-position: center;
 }
 
+/* Leave the below comment in until CSS is 100% */
 /* body {
   display: flex;
   flex-wrap: wrap;
