@@ -19,7 +19,7 @@ class Game {
 				physics: {
 					default: "arcade",
 					arcade: {
-						gravity: { y: 200 },
+						gravity: { y: 900 },
 						debug: true
 					},
 					
