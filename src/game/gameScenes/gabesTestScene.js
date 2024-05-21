@@ -6,9 +6,7 @@ import { createPlatform, platformObject, platformLoad } from "../assets/objects/
 import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objects/exit/exit";
 import levelTwoBg from "../assets/images/backgrounds/white.png";
 import testSprite from "../assets/spritesheets/character/spritesheet.png";
-// import idleAnimation from "../assets/spritesheets/dogwaterCharacter/badIdle.png";
-// import startRun from "../assets/spritesheets/dogwaterCharacter/badRunningAnimation.png";
-// import keepRunning from "../assets/spritesheets/dogwaterCharacter/badKeepRunning.png";
+//
 
 import { playerAnimUpdate, playerAnimCreate, playerAnimPreload } from "../util functions/playerAnims";
 
@@ -21,27 +19,10 @@ class GabeScene extends Phaser.Scene {
 	preload() {
 
     playerAnimPreload(this);
-		// this.load.spritesheet(`startRun`, startRun, {
-    //   frameWidth: 32,
-    //   frameHeight: 32
-    // });
-    
-    // this.load.spritesheet("character", idleAnimation, {
-    //   frameWidth: 32,
-    //   frameHeight: 32
-    // })
-
-    // this.load.spritesheet("continueRunning", keepRunning, {
-    //   frameWidth: 32,
-    //   frameHeight: 32
-    // })
-    
-
     this.load.image("bg", levelTwoBg);
 		exitLoad(this);
     platformLoad(this);
-    // this.movingL = false;
-    // this.movingR = false;
+   
 	}
 
 
@@ -59,7 +40,7 @@ class GabeScene extends Phaser.Scene {
 		
 
 		//player
-    this.player = this.physics.add.sprite(300,300, "character").setScale(3,3);
+    this.player = this.physics.add.sprite(300,300, "character").setScale(3,3)
 
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
@@ -69,37 +50,12 @@ class GabeScene extends Phaser.Scene {
 
 		//platforms
 
+    createPlatform(platforms, [700,780], [2,1]);
+
     //animations
    
     playerAnimCreate(this);
-    // this.anims.create({
-    //   key: "idle",
-    //   frames: this.anims.generateFrameNumbers("character"),
-    //   frameRate: 2,
-    //   repeat: -1
-    // })
-
-    // this.anims.create({
-    //   key: "runStart",
-    //   frames: this.anims.generateFrameNumbers("startRun"),
-    //   frameRate: 15,
-    //   repeat: 0
-    // })
-
-    // this.anims.create({
-    //   key: "keepRunning",
-    //   frames: this.anims.generateFrameNumbers("continueRunning"),
-    //   frameRate: 20,
-    //   repeat: -1
-    // })
-
-    // this.player.play("idle");
-    
-
-    
-
-
-	
+  
 
     //interacts
 		this.physics.add.collider(this.player, platforms);
@@ -112,40 +68,6 @@ class GabeScene extends Phaser.Scene {
 	update() {
 		playerControls(this);
     playerAnimUpdate(this);
-
-
-    // if ((this.player.body.velocity.x > 10) && this.movingR === false) {
-    //   this.player.play("runStart");
-    //   this.player.setScale(3,3)
-    //   this.player.setOffset(0,0);
-    //   this.movingR = true;
-    // }
-    // else if(this.player.body.velocity.x < 10 && this.movingR === true){
-    //   this.movingR = false;
-    //   this.player.stop("runStart");
-    //   this.player.play("idle"); 
-    // }
-    // else if(this.player.anims.currentAnim.key === "runStart" && this.player.anims.isPlaying === false){
-    //   this.player.play("keepRunning");
-    // }
-
-    
-    // if ((this.player.body.velocity.x < -10) && this.movingL === false) {
-    //   this.player.setScale(-3,3)
-    //   this.player.setOffset(32,0);
-    //   this.player.play("runStart");
-    //   this.movingL = true;
-    // }
-    // else if(this.player.body.velocity.x > -10 && this.movingL === true){
-    //   this.movingL = false;
-    //   this.player.stop("runStart");
-    //   this.player.play("idle"); 
-    // }
-    // else if(this.player.anims.currentAnim.key === "runStart" && this.player.anims.isPlaying === false){
-
-    //   this.player.play("keepRunning");
-    // }
-
 	}
 }
 
