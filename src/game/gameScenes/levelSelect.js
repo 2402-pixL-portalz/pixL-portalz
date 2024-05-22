@@ -31,7 +31,7 @@ class LevelSelect extends Phaser.Scene {
 		//declarations
 
 		//exit
-		createExit(this.exit, [100, 570], [1, 1]);
+
 
 		//player
 		this.player = this.physics.add.image(100, 500, `player`).setScale(1.6, 1.6);

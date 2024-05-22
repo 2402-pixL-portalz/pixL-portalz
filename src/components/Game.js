@@ -4,7 +4,7 @@ import LevelTwo from "../game/gameScenes/levels/levelTwo.js";
 import Phaser from "phaser";
 import ExitTestScene from "../game/gameScenes/testingScenes/exitTestScene.js";
 import GabeScene from "../game/gameScenes/gabesTestScene.js";
-import PortalTest from "../game/gameScenes/portalTestScene.js";
+import PortalTest from "../game/gameScenes/testingScenes/portalTestScene.js";
 
 class Game {
 	constructor() {
@@ -27,7 +27,7 @@ class Game {
 					arcade: {
 						gravity: { y: 900 },
 						debug: true
-					},
+					}
 				}
 			};
 
