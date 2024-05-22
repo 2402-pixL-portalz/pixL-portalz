@@ -146,7 +146,7 @@ const playerAnimUpdate = (level) => {
   }
 
   //if the player's x velocity is less than 10, and "movingR" is TRUE, and "movingL" is FALSE, set "movingR" to FALSE, if the character is NOT in the air, play the "idle" animation
-  else if (level.player.body.velocity.x < 10 && level.movingR === true && level.movingL === false) {
+  else if (level.player.body.velocity.x < 10 && level.movingR === true) {
     level.movingR = false;
     if (!level.inAir) {
       level.player.stop("runStart");
@@ -173,7 +173,7 @@ const playerAnimUpdate = (level) => {
     level.movingL = true;
   }
   //if the character was moving left but has stopped, if they are on the ground play the idle animation
-  else if (level.player.body.velocity.x > -10 && level.movingL === true && level.movingR === false) {
+  else if (level.player.body.velocity.x > -10 && level.movingL === true) {
     level.movingL = false;
     if (!level.inAir) {
       level.player.stop("runStart");

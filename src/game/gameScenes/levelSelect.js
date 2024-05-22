@@ -3,6 +3,7 @@ import mC from "../assets/images/character/pixilart-drawing.png";
 import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
 import { createExit, exitLoad } from "../assets/objects/exit/exit";
+import { playerAnimUpdate, playerAnimCreate, playerAnimPreload, } from "../util functions/playerAnims";
 import dayImage from "./../assets/images/backgrounds/day.png";
 import nightImage from "./../assets/images/backgrounds/night.png";
 
@@ -15,7 +16,7 @@ class LevelSelect extends Phaser.Scene {
 	preload() {
 		this.load.image(`player`, mC);
 		exitLoad(this);
-
+		playerAnimPreload(this);
 		this.load.image(`day`, dayImage);
 		this.load.image(`night`, nightImage);
 	}
@@ -34,15 +35,17 @@ class LevelSelect extends Phaser.Scene {
 
 
 		//player
-		this.player = this.physics.add.image(100, 500, `player`).setScale(1.6, 1.6);
+		this.player = this.physics.add.sprite(300, 300, "character").setScale(3, 3)
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
+		playerAnimCreate(this);
 	}
 
 	update() {
 		playerControls(this);
+		playerAnimUpdate(this);
 	}
 }
 
