@@ -110,8 +110,10 @@ const playerAnimUpdate = (level) => {
     level.player.play("jump");
     level.inAir = true;
   }
-  else if(!level.player.body.onFloor() && level.inAir === false) {
-    
+
+  else if(!level.player.body.onFloor() && level.inAir === false){
+    // console.log("works yay");
+
     level.player.play("fall");
     level.inAir = true;
   }
@@ -130,6 +132,7 @@ const playerAnimUpdate = (level) => {
   //if the character's x velocity is greater than 10(moving right), and "movingR" is FALSE, set "movingR" to TRUE, and set the character image to look right, if the character is NOT in the air, play the "runStart" animation
   if ((level.player.body.velocity.x > 10) && level.movingR === false) {
     level.movingR = true;
+    // console.log("xflip pos");
     level.player.setScale(3, 3)
     level.player.setOffset(9, 4);
     if (!level.inAir) {
@@ -164,6 +167,7 @@ const playerAnimUpdate = (level) => {
       level.runEmitter.gravityX = 1000;
       level.runEmitter.start();
     }
+    // console.log("xflip neg");
     level.player.setScale(-3, 3)
     level.player.setOffset(23, 4);
     level.movingL = true;
