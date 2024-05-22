@@ -2,9 +2,7 @@ import LevelOne from "../game/gameScenes/levels/levelOne.js";
 import LevelSelect from "../game/gameScenes/levelSelect.js";
 import LevelTwo from "../game/gameScenes/levels/levelTwo.js";
 import Phaser from "phaser";
-import ExitTestScene from "../game/gameScenes/testingScenes/exitTestScene.js";
-import GabeScene from "../game/gameScenes/gabesTestScene.js";
-import PortalTest from "../game/gameScenes/testingScenes/portalTestScene.js";
+import TylersTestScene from "../game/gameScenes/testingScenes/tylersTestScene.js";
 
 class Game {
 	constructor() {

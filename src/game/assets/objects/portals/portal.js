@@ -54,13 +54,18 @@ const createPortal = (This, color, x, y, rotation) => {
 	return portal;
 };
 
-const addTeleportingOverlap = (This, enteringPortal, exitingPortal, objectsAllowedToOverlap) => {
-	This.physics.add.overlap(enteringPortal, objectsAllowedToOverlap, (obj1, item) => {
+const joinPortals = (This, enteringPortal, exitingPortal, objectsAllowedToOverlap) => {
+	addTeleportingOverlap(This, enteringPortal, exitingPortal, objectsAllowedToOverlap);
+	addTeleportingOverlap(This, exitingPortal, enteringPortal, objectsAllowedToOverlap);
+};
+
+const addTeleportingOverlap = (This, portal1, portal2, objectsAllowedToOverlap) => {
+	This.physics.add.overlap(portal1, objectsAllowedToOverlap, (obj1, item) => {
 		if (!This.inPortal) {
 			This.inPortal = true;
-			item.setPosition(exitingPortal.x, exitingPortal.y);
+			item.setPosition(portal2.x, portal2.y);
 
-			applyPortalTrajectory(enteringPortal, exitingPortal, item);
+			applyPortalTrajectory(portal1, portal2, item);
 		}
 		This.currentInPortalNumber++;
 	});
@@ -76,4 +81,4 @@ const portalUpdate = (This) => {
 	}
 };
 
-export { portalLoad, createPortal, addTeleportingOverlap, portalVars, portalUpdate };
+export { portalLoad, createPortal, joinPortals, portalVars, portalUpdate };
