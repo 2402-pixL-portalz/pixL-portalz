@@ -14,7 +14,6 @@ const createExit = (level, scene, isUnlocked, [xPosition, yPosition], [lengthSca
 	setIsUnlocked(exit, isUnlocked);
 
 	exit.pastIsUnlocked = exit.isUnlocked;
-
 	level.physics.add.overlap(exit, level.player, () => {
 		if ((level.controls.S.isDown || level.controls.DOWN.isDown) && exit.isUnlocked) {
 			level.scene.start(scene);
