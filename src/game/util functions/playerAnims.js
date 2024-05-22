@@ -110,8 +110,10 @@ const playerAnimUpdate = (level) => {
     level.player.play("jump");
     level.inAir = true;
   }
+
   else if(!level.player.body.onFloor() && level.inAir === false){
     // console.log("works yay");
+
     level.player.play("fall");
     level.inAir = true;
   }
