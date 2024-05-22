@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../assets/objects/platforms/platform";
-import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objects/exit/exit";
+import { exitLoad } from "../assets/objects/exit/exit";
 import levelTwoBg from "../assets/images/backgrounds/white.png";
 import mC from "../assets/images/character/pixilart-drawing.png";
 import { portalVars, portalLoad, portalUpdate, createPortal, addTeleportingOverlap } from "../assets/objects/portals/portal";
@@ -34,7 +34,6 @@ class GabeScene extends Phaser.Scene {
   create() {
     //declarations
     const platforms = platformObject(this);
-    const exit = exitObject(this);
 
     //background
     const bg = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "bg");
@@ -72,7 +71,7 @@ class GabeScene extends Phaser.Scene {
 
     //interacts
     this.physics.add.collider(this.player, platforms);
-    this.physics.add.overlap(this.player, exit, () => { goThroughExit(this, "Level Select") });
+
 
     addTeleportingOverlap(this, this.myPortal, this.myPortal2, [this.player]);
 
