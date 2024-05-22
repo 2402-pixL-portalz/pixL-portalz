@@ -27,7 +27,7 @@ const Login = () => {
           console.log('Error logging in, no token received', userData);
         }
       } else {
-        console.log('Error: Response is not JSON');
+        console.log('Error: Response is not JSON'); // Receiving this response in console when attempting to login
       }
     } catch (error) {
       console.error('Error logging in', error);
@@ -53,8 +53,8 @@ const Login = () => {
           required
         /><br />
 
-        <br></br>
-        <br></br>
+        <br></br> {/*added for quick css button placement alternative*/}
+        <br></br> {/*added for quick css button placement alternative*/}
         <button className="button loginPageButton">Login</button>
       </form>
     </div>
