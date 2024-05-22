@@ -18,14 +18,11 @@ class GabeScene extends Phaser.Scene {
 
   preload() {
     this.load.image("player", mC);
-    // playerAnimPreload(this);
+    playerAnimPreload(this);
     this.load.image("bg", levelTwoBg);
     exitLoad(this);
     platformLoad(this);
     portalLoad(this, `blue`);
-
-    // this.load.image("runParticle", runParticle);
-    // this.runEmitter;
 
   }
 
@@ -43,14 +40,8 @@ class GabeScene extends Phaser.Scene {
 
 
     //player
-    // this.player = this.physics.add.sprite(300, 300, "character").setScale(3, 3)
+    this.player = this.physics.add.sprite(300, 300, "character").setScale(3, 3)
 
-    // this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
-
-    // this.player.setCollideWorldBounds(true);
-    // this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
-
-    this.player = this.physics.add.image(100, 500, `player`).setScale(1.6, 1.6);
     this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
     this.player.setCollideWorldBounds(true);
@@ -63,7 +54,7 @@ class GabeScene extends Phaser.Scene {
 
     //animations
 
-    // playerAnimCreate(this);
+    playerAnimCreate(this);
 
     //portals 
     this.myPortal = createPortal(this, `blue`, this.sys.game.config.width / 4, this.sys.game.config.height - 100, `down`);
@@ -84,7 +75,7 @@ class GabeScene extends Phaser.Scene {
 
   update() {
     playerControls(this);
-    // playerAnimUpdate(this);
+    playerAnimUpdate(this);
     portalUpdate(this);
   }
 }
