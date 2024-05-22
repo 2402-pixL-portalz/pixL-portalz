@@ -17,7 +17,7 @@ class Game {
 				type: Phaser.AUTO,
 				width: 1600,
 				height: 800,
-				scene: [PortalTest, GabeScene, LevelSelect, LevelOne, LevelTwo],
+				scene: [LevelSelect, LevelOne, LevelTwo],
 				fps: {
 					target: 60,
 					forceSetTimeOut: true
