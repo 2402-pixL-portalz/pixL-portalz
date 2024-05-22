@@ -2,6 +2,7 @@ import idleAnimation from "../assets/spritesheets/dogwaterCharacter/badIdle.png"
 import startRun from "../assets/spritesheets/dogwaterCharacter/badRunningAnimation.png";
 import keepRunning from "../assets/spritesheets/dogwaterCharacter/badKeepRunning.png";
 import jump from "../assets/spritesheets/dogwaterCharacter/badJump.png";
+import runParticle from "../assets/images/particles/runningParticle.png";
 
 
 
@@ -27,11 +28,14 @@ const playerAnimPreload = (level) => {
     frameWidth: 32,
     frameHeight: 32
   });
+  level.load.image("runParticle", runParticle);
 
 
   level.movingL = false;
   level.movingR = false;
   level.inAir = false;
+
+  level.runEmitter;
 }
 
 const playerAnimCreate = (level) => {
@@ -63,7 +67,18 @@ const playerAnimCreate = (level) => {
     repeat: 0
   })
 
+  level.runEmitter = level.add.particles(100, 300, 'runParticle', {
+      speed: {min: 100, max: 100},
+      angle: {min: -180, max: 0},
+      scale: {start: .05, end: 0},
+      lifespan: 500,
+      gravityY: 700,
+      gravityX: 700,
+      quantity: 2,
+      duration: 100,
+    })
 
+  level.runEmitter.stop();
   level.player.play("idle");
   level.player.body.setSize(13, 26)
   // level.player.body.setOffset(9,6)
@@ -71,6 +86,9 @@ const playerAnimCreate = (level) => {
 
 
 const playerAnimUpdate = (level) => {
+
+  
+
 
   //if the character is NOT on the floor and "inAir" is set to FALSE, play the "jump" animation and set "inAir" to TRUE
   if (!level.player.body.onFloor() && level.inAir === false) {
@@ -97,6 +115,9 @@ const playerAnimUpdate = (level) => {
     level.player.setOffset(9, 4);
     if (!level.inAir) {
       level.player.play("runStart");
+      level.runEmitter.setPosition(level.player.body.position.x + 18,level.player.body.position.y + 70);
+      level.runEmitter.gravityX = -1000;
+      level.runEmitter.start();
     }
 
     // console.log("movingR true");
@@ -120,6 +141,9 @@ const playerAnimUpdate = (level) => {
     // console.log("movingL true");
     if (!level.inAir) {
       level.player.play("runStart");
+      level.runEmitter.setPosition(level.player.body.position.x + 18,level.player.body.position.y + 70);
+      level.runEmitter.gravityX = 1000;
+      level.runEmitter.start();
     }
     level.player.setScale(-3, 3)
     level.player.setOffset(23, 4);
