@@ -2,20 +2,20 @@ import Phaser from "phaser";
 
 class Box extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, 'box');
+    super(scene, x, y, "box");
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
     // Physics properties for box
     this.setCollideWorldBounds(true);
-    this.setBounce(.3);
+    this.setBounce(0.3);
     this.setDrag(100, 100);
     this.setAngularDrag(10);
     this.setMass(10);
     this.body.setGravityY(300);
 
     this.setSize(this.width, this.height);
-    this.setOrigin(.5, .5);
+    this.setOrigin(0.5, 0.5);
     this.boxFlipped = false;
     this.landed = false;
   }
@@ -36,13 +36,9 @@ class Box extends Phaser.Physics.Arcade.Sprite {
 
         this.setAngularVelocity(flipDirection * flipImpulse);
         this.setVelocityX(flipDirection * flipImpulse);
-
-        
       }
     }
   }
-
-  
 
   update() {
     if (!this.body.blocked.down) {
@@ -56,12 +52,15 @@ class Box extends Phaser.Physics.Arcade.Sprite {
       }
 
       // Gradually reduce angular velocity
-      this.setAngularVelocity(this.body.angularVelocity * .91);
+      this.setAngularVelocity(this.body.angularVelocity * 0.91);
 
       // If the box is moving slowly, make it rotate to the nearest flat side
-      if (Math.abs(this.body.angularVelocity) < .1 && Math.abs(this.body.velocity.x) < 50) {
+      if (
+        Math.abs(this.body.angularVelocity) < 0.1 &&
+        Math.abs(this.body.velocity.x) < 50
+      ) {
         const angle = this.angle % 360;
-       const nearestRightAngle = Math.round(angle / 90) * 90;
+        const nearestRightAngle = Math.round(angle / 90) * 90;
         const angleDifference = nearestRightAngle - angle;
 
         if (Math.abs(angleDifference) < 100) {

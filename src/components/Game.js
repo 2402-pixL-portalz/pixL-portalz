@@ -14,7 +14,7 @@ class Game {
 				type: Phaser.AUTO,
 				width: 1600,
 				height: 800,
-				scene: [LevelTwo, LevelSelect, LevelOne, ],
+				scene: [ LevelSelect, LevelOne, LevelTwo ],
 				physics: {
 					default: "arcade",
 					arcade: {
