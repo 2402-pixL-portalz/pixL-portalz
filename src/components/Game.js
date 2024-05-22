@@ -3,7 +3,8 @@ import LevelSelect from "../game/gameScenes/levelSelect.js";
 import LevelTwo from "../game/gameScenes/levels/levelTwo.js";
 import Phaser from "phaser";
 import ExitTestScene from "../game/gameScenes/testingScenes/exitTestScene.js";
-import PortalTest from "../game/gameScenes/testingScenes/portalTestScene.js";
+import GabeScene from "../game/gameScenes/gabesTestScene.js";
+import PortalTest from "../game/gameScenes/portalTestScene.js";
 
 class Game {
 	constructor() {
@@ -16,13 +17,17 @@ class Game {
 				type: Phaser.AUTO,
 				width: 1600,
 				height: 800,
-				scene: [ExitTestScene, LevelSelect, LevelOne, LevelTwo],
+				scene: [LevelSelect, LevelOne, LevelTwo],
+				fps: {
+					target: 60,
+					forceSetTimeOut: true
+				},
 				physics: {
 					default: "arcade",
 					arcade: {
 						gravity: { y: 900 },
 						debug: true
-					}
+					},
 				}
 			};
 

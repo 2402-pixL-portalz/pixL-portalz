@@ -2,7 +2,8 @@ import idleAnimation from "../assets/spritesheets/dogwaterCharacter/badIdle.png"
 import startRun from "../assets/spritesheets/dogwaterCharacter/badRunningAnimation.png";
 import keepRunning from "../assets/spritesheets/dogwaterCharacter/badKeepRunning.png";
 import jump from "../assets/spritesheets/dogwaterCharacter/badJump.png";
-
+import runParticle from "../assets/images/particles/runningParticle.png";
+import fall from "../assets/spritesheets/dogwaterCharacter/badFall.png";
 
 
 
@@ -27,11 +28,21 @@ const playerAnimPreload = (level) => {
     frameWidth: 32,
     frameHeight: 32
   });
+  
+  
+  level.load.spritesheet("fall", fall, {
+    frameWidth: 32,
+    frameHeight: 32
+  });
+
+  level.load.image("runParticle", runParticle);
 
 
   level.movingL = false;
   level.movingR = false;
   level.inAir = false;
+
+  level.runEmitter;
 }
 
 const playerAnimCreate = (level) => {
@@ -63,7 +74,25 @@ const playerAnimCreate = (level) => {
     repeat: 0
   })
 
+  level.anims.create({
+    key: "fall",
+    frames: level.anims.generateFrameNumbers("fall"),
+    frameRate: 10,
+    repeat: 0
+  })
 
+  level.runEmitter = level.add.particles(100, 300, 'runParticle', {
+      speed: {min: 100, max: 100},
+      angle: {min: -180, max: 0},
+      scale: {start: .05, end: 0},
+      lifespan: 500,
+      gravityY: 700,
+      gravityX: 700,
+      quantity: 2,
+      duration: 100,
+    })
+
+  level.runEmitter.stop();
   level.player.play("idle");
   level.player.body.setSize(13, 26)
   // level.player.body.setOffset(9,6)
@@ -72,10 +101,20 @@ const playerAnimCreate = (level) => {
 
 const playerAnimUpdate = (level) => {
 
+  
+
+
   //if the character is NOT on the floor and "inAir" is set to FALSE, play the "jump" animation and set "inAir" to TRUE
-  if (!level.player.body.onFloor() && level.inAir === false) {
+  if (!level.player.body.onFloor() && level.inAir === false && (level.controls.W.isDown || level.controls.UP.isDown || level.controls.SPACE.isDown)) {
     // console.log("in air true");
     level.player.play("jump");
+    level.inAir = true;
+  }
+
+  else if(!level.player.body.onFloor() && level.inAir === false){
+    // console.log("works yay");
+
+    level.player.play("fall");
     level.inAir = true;
   }
 
@@ -93,10 +132,14 @@ const playerAnimUpdate = (level) => {
   //if the character's x velocity is greater than 10(moving right), and "movingR" is FALSE, set "movingR" to TRUE, and set the character image to look right, if the character is NOT in the air, play the "runStart" animation
   if ((level.player.body.velocity.x > 10) && level.movingR === false) {
     level.movingR = true;
+    // console.log("xflip pos");
     level.player.setScale(3, 3)
     level.player.setOffset(9, 4);
     if (!level.inAir) {
       level.player.play("runStart");
+      level.runEmitter.setPosition(level.player.body.position.x + 18,level.player.body.position.y + 70);
+      level.runEmitter.gravityX = -1000;
+      level.runEmitter.start();
     }
 
     // console.log("movingR true");
@@ -120,7 +163,11 @@ const playerAnimUpdate = (level) => {
     // console.log("movingL true");
     if (!level.inAir) {
       level.player.play("runStart");
+      level.runEmitter.setPosition(level.player.body.position.x + 18,level.player.body.position.y + 70);
+      level.runEmitter.gravityX = 1000;
+      level.runEmitter.start();
     }
+    // console.log("xflip neg");
     level.player.setScale(-3, 3)
     level.player.setOffset(23, 4);
     level.movingL = true;
