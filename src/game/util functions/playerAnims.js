@@ -106,7 +106,7 @@ const playerAnimUpdate = (level) => {
 
   //if the character is NOT on the floor and "inAir" is set to FALSE, play the "jump" animation and set "inAir" to TRUE
   if (!level.player.body.onFloor() && level.inAir === false && (level.controls.W.isDown || level.controls.UP.isDown || level.controls.SPACE.isDown)) {
-    // console.log("in air true");
+    console.log("in air true");
     level.player.play("jump");
     level.inAir = true;
   }
@@ -130,6 +130,7 @@ const playerAnimUpdate = (level) => {
   //if the character's x velocity is greater than 10(moving right), and "movingR" is FALSE, set "movingR" to TRUE, and set the character image to look right, if the character is NOT in the air, play the "runStart" animation
   if ((level.player.body.velocity.x > 10) && level.movingR === false) {
     level.movingR = true;
+    console.log("xflip pos");
     level.player.setScale(3, 3)
     level.player.setOffset(9, 4);
     if (!level.inAir) {
@@ -139,7 +140,7 @@ const playerAnimUpdate = (level) => {
       level.runEmitter.start();
     }
 
-    // console.log("movingR true");
+    console.log("movingR true");
   }
 
   //if the player's x velocity is less than 10, and "movingR" is TRUE, and "movingL" is FALSE, set "movingR" to FALSE, if the character is NOT in the air, play the "idle" animation
@@ -149,7 +150,7 @@ const playerAnimUpdate = (level) => {
       level.player.stop("runStart");
       level.player.play("idle");
     }
-    // console.log("movingR false")
+    console.log("movingR false")
   }
   
   
@@ -157,13 +158,14 @@ const playerAnimUpdate = (level) => {
 
   //if the character is moving left, make the image face left, and if they are on the ground start a running animation
   if ((level.player.body.velocity.x < -10) && level.movingL === false) {
-    // console.log("movingL true");
+    console.log("movingL true");
     if (!level.inAir) {
       level.player.play("runStart");
       level.runEmitter.setPosition(level.player.body.position.x + 18,level.player.body.position.y + 70);
       level.runEmitter.gravityX = 1000;
       level.runEmitter.start();
     }
+    console.log("xflip neg");
     level.player.setScale(-3, 3)
     level.player.setOffset(23, 4);
     level.movingL = true;
@@ -175,7 +177,7 @@ const playerAnimUpdate = (level) => {
       level.player.stop("runStart");
       level.player.play("idle");
     }
-    // console.log("movingL false");
+    console.log("movingL false");
   }
 
   //if the "runStart" animation has completed, play "keep running animation"
