@@ -1,8 +1,8 @@
 import Phaser from "phaser";
-import mC from "../assets/images/character/pixilart-drawing.png"
+import mC from "../assets/images/character/pixilart-drawing.png";
 import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
-import { createExit, exitLoad, exitObject } from "../assets/objects/exit/exit";
+import { createExit, exitLoad } from "../assets/objects/exit/exit";
 import dayImage from "./../assets/images/backgrounds/day.png";
 import nightImage from "./../assets/images/backgrounds/night.png";
 
@@ -29,7 +29,6 @@ class LevelSelect extends Phaser.Scene {
 		this.bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
 		//declarations
-		this.exit = exitObject(this);
 
 		//exit
 		createExit(this.exit, [100, 570], [1, 1]);
