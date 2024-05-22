@@ -11,7 +11,7 @@ const Navbar = ({ game }) => {
       </header>
       
 			<nav className="nav">
-				<button class="button homeButton"
+				<button className="button homeButton"
 					onClick={() => {
 						navigate("/");
 					}}
@@ -19,7 +19,7 @@ const Navbar = ({ game }) => {
 					Home
 				</button>
         
-				<button class="button loginButton"
+				<button className="button loginButton"
 					onClick={() => {
 						game.deleteGame();
 						navigate("/Login");
@@ -28,7 +28,7 @@ const Navbar = ({ game }) => {
 					Login
 				</button>
 
-				<button class="button registerButton"
+				<button className="button registerButton"
 					onClick={() => {
 						game.deleteGame();
 						navigate("/Register");

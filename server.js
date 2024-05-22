@@ -1,40 +1,47 @@
-require(`dotenv/config`);
-const express = require(`express`);
-const morgan = require(`morgan`);
+require('dotenv').config();
+const express = require('express');
+const morgan = require('morgan');
 const { verifyToken } = require('./auth/authMiddleware.js');
 
 const app = express();
 
-// various middleware
-
-app.use(morgan(`dev`));
-
+// Middleware
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Log environment variables
+console.log('PORT:', process.env.PORT);
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
+
+// Body Logger Middleware
 app.use((req, _, next) => {
-	console.log("<___BODY LOGGER START_____>");
-	console.log(req.body);
-	console.log("<___BODY LOGGER END_______>");
-	next();
+  console.log('<___BODY LOGGER START_____>');
+  console.log(req.body);
+  console.log('<___BODY LOGGER END_______>');
+  next();
 });
 
-// route to api
-app.use(`/api/v1/levels`, require(`./api/levels.js`));
+// Routes
+app.use('/api/v1/levels', require('./api/levels.js'));
+app.use('/api/v1/auth', require('./auth/auth.js'));
 
-// route to authentication
-app.use(`/api/v1/auth`, require(`./auth/auth.js`));
-
+// Protected Route
 app.get('/api/v1/protected', verifyToken, (req, res) => {
-	res.send('This is a protected route only accessible with valid token.');
+  res.send('This is a protected route only accessible with a valid token.');
 });
-// serving front-end for user
-for (const path of ["/"]) {
-	app.use(path, express.static("dist"));
+
+// Serve Frontend
+for (const path of ['/']) {
+  app.use(path, express.static('dist'));
 }
 
-app.listen(process.env.PORT || 3000, () => {
-	console.log("LISTENING ON PORT", process.env.PORT);
+// Define Port
+const PORT = process.env.PORT || 3000;
+
+// Start Server
+app.listen(PORT, () => {
+  console.log('Server running on port', PORT);
 });
 
 module.exports = app;

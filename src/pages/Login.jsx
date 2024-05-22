@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -14,21 +14,23 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          username,
-          password
-        })
+        body: JSON.stringify({ username, password }),
       });
 
-      const userData = await result.json()
-      if (userData.token) {
-        localStorage.setItem('token', userData.token)
-        navigate('/');
+      // Check if the response is JSON
+      if (result.headers.get('content-type')?.includes('application/json')) {
+        const userData = await result.json();
+        if (userData.token) {
+          localStorage.setItem('token', userData.token);
+          navigate('/');
+        } else {
+          console.log('Error logging in, no token received', userData);
+        }
       } else {
-        console.log("error logging in, no token received", userData);
+        console.log('Error: Response is not JSON');
       }
     } catch (error) {
-      console.error("error logging in", error);
+      console.error('Error logging in', error);
     }
   };
 
@@ -36,25 +38,21 @@ const Login = () => {
     <div>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <label>Username: </label><br/>
+        <label>Username: </label><br />
         <input
           value={username}
           type="text"
           onChange={(e) => setUsername(e.target.value)}
           required
-        /><br/>
-
-        <label>Password:</label><br/>
-        <input 
+        /><br />
+        <label>Password:</label><br />
+        <input
           value={password}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           required
-        /><br/>
-        
-        <br></br>
-        <br></br>
-        <button class="button loginPageButton">Login</button>
+        /><br />
+        <button className="button loginPageButton">Login</button>
       </form>
     </div>
   );
