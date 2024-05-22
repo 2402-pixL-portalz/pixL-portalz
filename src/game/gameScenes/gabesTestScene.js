@@ -4,9 +4,7 @@ import playerControls from "../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../assets/objects/platforms/platform";
 import { exitLoad } from "../assets/objects/exit/exit";
 import levelTwoBg from "../assets/images/backgrounds/white.png";
-import mC from "../assets/images/character/pixilart-drawing.png";
 import { portalVars, portalLoad, portalUpdate, createPortal, addTeleportingOverlap } from "../assets/objects/portals/portal";
-
 import { playerAnimUpdate, playerAnimCreate, playerAnimPreload, } from "../util functions/playerAnims";
 
 class GabeScene extends Phaser.Scene {
@@ -17,7 +15,6 @@ class GabeScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("player", mC);
     playerAnimPreload(this);
     this.load.image("bg", levelTwoBg);
     exitLoad(this);
