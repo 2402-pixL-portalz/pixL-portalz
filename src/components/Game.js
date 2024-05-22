@@ -1,10 +1,10 @@
-import LevelOne from "../game/gameScenes/levelOne.js";
+import LevelOne from "../game/gameScenes/levels/levelOne.js";
 import LevelSelect from "../game/gameScenes/levelSelect.js";
-import LevelTwo from "../game/gameScenes/levelTwo.js";
+import LevelTwo from "../game/gameScenes/levels/levelTwo.js";
 import Phaser from "phaser";
+import ExitTestScene from "../game/gameScenes/testingScenes/exitTestScene.js";
 import GabeScene from "../game/gameScenes/gabesTestScene.js";
 import PortalTest from "../game/gameScenes/portalTestScene.js";
-
 
 class Game {
 	constructor() {
@@ -28,7 +28,6 @@ class Game {
 						gravity: { y: 900 },
 						debug: true
 					},
-
 				}
 			};
 

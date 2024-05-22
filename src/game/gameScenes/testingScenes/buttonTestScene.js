@@ -1,10 +1,10 @@
 import Phaser from "phaser";
 import mC from "../assets/images/character/pixilart-drawing.png";
-import playerVars from "../util functions/playerVars";
-import playerControls from "../util functions/playerControls";
+import playerVars from "../../util functions/playerVars";
+import playerControls from "../../util functions/playerControls";
 import dayImage from "./../assets/images/backgrounds/day.png";
-import { createPlatform, platformLoad, platformObject } from "../assets/objects/platforms/platform";
-import { addButtonOverlap, buttonLoad, buttonUpdate, buttonVars, createButton } from "../assets/objects/buttons/button";
+import { createPlatform, platformLoad, platformObject } from "../../assets/objects/platforms/platform";
+import { addButtonOverlap, buttonLoad, buttonUpdate, buttonVars, createButton } from "../../assets/objects/buttons/button";
 
 class ButtonTest extends Phaser.Scene {
 	constructor() {

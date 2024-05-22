@@ -1,9 +1,9 @@
 import Phaser from "phaser";
-import mC from "../assets/images/character/pixilart-drawing.png";
-import playerVars from "../util functions/playerVars";
-import playerControls from "../util functions/playerControls";
-import dayImage from "./../assets/images/backgrounds/day.png";
-import { addTeleportingOverlap, createPortal, portalLoad, portalUpdate, portalVars } from "../assets/objects/portals/portal";
+import mC from "../../assets/images/character/pixilart-drawing.png";
+import playerVars from "../../util functions/playerVars";
+import playerControls from "../../util functions/playerControls";
+import dayImage from "./../../assets/images/backgrounds/day.png";
+import { addTeleportingOverlap, createPortal, portalLoad, portalUpdate, portalVars } from "../../assets/objects/portals/portal";
 
 class PortalTest extends Phaser.Scene {
 	constructor() {
