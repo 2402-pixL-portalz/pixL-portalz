@@ -54,7 +54,7 @@ class GabeScene extends Phaser.Scene {
 
     //platforms
 
-    createPlatform(platforms, [700, 780], [2, 1]);
+    createPlatform(platforms, [700, 750], [2, 1]);
 
     //animations
 

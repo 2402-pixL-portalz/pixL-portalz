@@ -3,7 +3,7 @@ import startRun from "../assets/spritesheets/dogwaterCharacter/badRunningAnimati
 import keepRunning from "../assets/spritesheets/dogwaterCharacter/badKeepRunning.png";
 import jump from "../assets/spritesheets/dogwaterCharacter/badJump.png";
 import runParticle from "../assets/images/particles/runningParticle.png";
-
+import fall from "../assets/spritesheets/dogwaterCharacter/badFall.png";
 
 
 
@@ -28,6 +28,13 @@ const playerAnimPreload = (level) => {
     frameWidth: 32,
     frameHeight: 32
   });
+  
+  
+  level.load.spritesheet("fall", fall, {
+    frameWidth: 32,
+    frameHeight: 32
+  });
+
   level.load.image("runParticle", runParticle);
 
 
@@ -67,6 +74,13 @@ const playerAnimCreate = (level) => {
     repeat: 0
   })
 
+  level.anims.create({
+    key: "fall",
+    frames: level.anims.generateFrameNumbers("fall"),
+    frameRate: 10,
+    repeat: 0
+  })
+
   level.runEmitter = level.add.particles(100, 300, 'runParticle', {
       speed: {min: 100, max: 100},
       angle: {min: -180, max: 0},
@@ -91,9 +105,14 @@ const playerAnimUpdate = (level) => {
 
 
   //if the character is NOT on the floor and "inAir" is set to FALSE, play the "jump" animation and set "inAir" to TRUE
-  if (!level.player.body.onFloor() && level.inAir === false) {
+  if (!level.player.body.onFloor() && level.inAir === false && (level.controls.W.isDown || level.controls.UP.isDown || level.controls.SPACE.isDown)) {
     // console.log("in air true");
     level.player.play("jump");
+    level.inAir = true;
+  }
+  else if(!level.player.body.onFloor() && level.inAir === false){
+    console.log("works yay");
+    level.player.play("fall");
     level.inAir = true;
   }
 
