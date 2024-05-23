@@ -5,11 +5,11 @@ import playerControls from "../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../assets/objects/platforms/platform";
 import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objects/exit/exit";
 import levelTwoBg from "../assets/images/backgrounds/level2.jpg";
-import { boxLoad, createBox } from "../assets/objects/box/box";
+import { boxLoad, boxUpdate, createBox } from "../assets/objects/box/box";
 
-class LevelTwo extends Phaser.Scene {
+class boxTestScene extends Phaser.Scene {
 	constructor() {
-		super(`LevelTwo`);
+		super(`box test`);
 		playerVars(this);
 	}
 
@@ -17,13 +17,12 @@ class LevelTwo extends Phaser.Scene {
 		this.load.image(`player`, mC);
 		this.load.image("bg", levelTwoBg);
 		platformLoad(this);
-		exitLoad(this);
+		boxLoad(this);
 	}
 
 	create() {
 		//declarations
 		const platforms = platformObject(this);
-		const exit = exitObject(this);
 
 		//background
 		const bg = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "bg");
@@ -43,17 +42,14 @@ class LevelTwo extends Phaser.Scene {
 
 		//interacts
 		this.physics.add.collider(this.player, platforms);
-		this.physics.add.overlap(this.player, exit, () => {
-			goThroughExit(this, "Level Select");
-		});
 
-		//collision between box and platforms
-		this.physics.add.collider(this.box, platforms);
+		this.box = createBox(this, 500, 100, 1, 1, [this.player, platforms]);
 	}
 
 	update() {
 		playerControls(this);
+		boxUpdate(this.box);
 	}
 }
 
-export default LevelTwo;
+export default boxTestScene;
