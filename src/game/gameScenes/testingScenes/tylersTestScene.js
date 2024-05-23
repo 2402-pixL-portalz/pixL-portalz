@@ -47,7 +47,6 @@ class TylersTestScene extends Phaser.Scene {
 
 		//player
 		this.player = this.physics.add.sprite(300, 300, "character").setScale(3, 3);
-		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
@@ -70,7 +69,7 @@ class TylersTestScene extends Phaser.Scene {
 		this.physics.add.collider(this.player, platforms);
 
 		this.portal1 = createPortal(this, `blue`, 900, 775, `up`);
-		this.portal2 = createPortal(this, `blue`, 900, 300, `left`);
+		this.portal2 = createPortal(this, `blue`, 900, 300, `right`);
 
 		this.portal3 = createPortal(this, `blue`, 50, 775, `up`);
 		this.portal4 = createPortal(this, `blue`, 50, 50, `down`);
