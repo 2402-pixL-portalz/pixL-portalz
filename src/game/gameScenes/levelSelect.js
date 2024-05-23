@@ -29,6 +29,9 @@ class LevelSelect extends Phaser.Scene {
 		this.bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
 		//declarations
+		const layer = this.add.layer();
+		
+
 
 		
 		//player
@@ -42,6 +45,9 @@ class LevelSelect extends Phaser.Scene {
 		//exit
 		this.exit1 = createExit(this, "Level One", true, [600,750], [1,1]);
 
+		//layering
+		layer.add([this.player]);
+		layer.setDepth(1);
 	}
 
 	update() {
