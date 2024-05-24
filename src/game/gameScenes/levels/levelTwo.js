@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-import { boxLoad, createBox } from "../assets/objects/box/box";
+import { boxLoad, createBox } from "../../assets/objects/box/box";
 import mC from "../../assets/images/character/pixilart-drawing.png";
 import playerVars from "../../util functions/playerVars";
 import playerControls from "../../util functions/playerControls";
