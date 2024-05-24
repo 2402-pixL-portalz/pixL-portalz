@@ -4,14 +4,17 @@ import playerControls from "../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../assets/objects/platforms/platform";
 import { exitLoad } from "../assets/objects/exit/exit";
 import levelTwoBg from "../assets/images/backgrounds/white.png";
-import { portalVars, portalLoad, portalUpdate, createPortal, addTeleportingOverlap } from "../assets/objects/portals/portal";
-import { playerAnimUpdate, playerAnimCreate, playerAnimPreload, } from "../util functions/playerAnims";
+import { portalVars, portalLoad, portalUpdate, createPortal} from "../assets/objects/portals/portal";
+import { playerAnimUpdate, playerAnimCreate, playerAnimPreload } from "../util functions/playerAnims";
+import { createGarage, garageLoad, garageUpdate } from "../assets/objects/garage/garage";
+import { buttonVars, buttonLoad, buttonUpdate, createButton, addButtonOverlap} from "../assets/objects/buttons/button";
 
 class GabeScene extends Phaser.Scene {
   constructor() {
     super(`GabeScene`);
     playerVars(this);
     portalVars(this);
+    buttonVars(this);
   }
 
   preload() {
@@ -20,7 +23,8 @@ class GabeScene extends Phaser.Scene {
     exitLoad(this);
     platformLoad(this);
     portalLoad(this, `blue`);
-
+    garageLoad(this);
+    buttonLoad(this);
   }
 
 
@@ -57,23 +61,39 @@ class GabeScene extends Phaser.Scene {
     this.myPortal = createPortal(this, `blue`, this.sys.game.config.width / 4, this.sys.game.config.height - 100, `down`);
     this.myPortal2 = createPortal(this, `blue`, this.sys.game.config.width / 4, this.sys.game.config.height - 500, `down`);
 
+    
+
+    //buttons
+    this.myButton = createButton(this, 700, 735, 1, 1);
+    addButtonOverlap(this, this.myButton, [this.player]);
+
+    //garage
+    this.garage1 = createGarage(this, [1150,750],[3,.25],'RIGHT', .03);
+    this.garage2 = createGarage(this, [500,350],[.25,3],'UP', .01);
+    this.garage3 = createGarage(this, [1150,350],[.25,3],'DOWN', .02);
+   
+    
+
     //interacts
     this.physics.add.collider(this.player, platforms);
+    // this.physics.add.collider(this.player, this.garage1);
 
-
-    addTeleportingOverlap(this, this.myPortal, this.myPortal2, [this.player]);
-
-		addTeleportingOverlap(this, this.myPortal2, this.myPortal, [this.player]);
-
-
-
-
+    
   }
 
   update() {
+
     playerControls(this);
     playerAnimUpdate(this);
     portalUpdate(this);
+    buttonUpdate(this, this.myButton);
+    garageUpdate(this.garage1, this.myButton.isPressed);
+    garageUpdate(this.garage2, this.myButton.isPressed);
+    garageUpdate(this.garage3, this.myButton.isPressed);
+
+    
+
+    
   }
 }
 
