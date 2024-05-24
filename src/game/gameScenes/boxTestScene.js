@@ -1,24 +1,23 @@
 import Phaser from "phaser";
+import mC from "../assets/images/character/pixilart-drawing.png";
+import playerVars from "../util functions/playerVars";
+import playerControls from "../util functions/playerControls";
+import { createPlatform, platformObject, platformLoad } from "../assets/objects/platforms/platform";
+import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objects/exit/exit";
+import levelTwoBg from "../assets/images/backgrounds/level2.jpg";
+import { boxLoad, boxUpdate, createBox } from "../assets/objects/box/box";
 
-import { boxLoad, createBox } from "../assets/objects/box/box";
-import mC from "../../assets/images/character/pixilart-drawing.png";
-import playerVars from "../../util functions/playerVars";
-import playerControls from "../../util functions/playerControls";
-import { createPlatform, platformObject, platformLoad } from "../../assets/objects/platforms/platform";
-import { exitLoad, createExit } from "../../assets/objects/exit/exit";
-import levelTwoBg from "../../assets/images/backgrounds/level2.jpg";
-
-class LevelTwo extends Phaser.Scene {
+class boxTestScene extends Phaser.Scene {
 	constructor() {
-		super(`LevelTwo`);
+		super(`box test`);
 		playerVars(this);
 	}
 
 	preload() {
 		this.load.image(`player`, mC);
 		this.load.image("bg", levelTwoBg);
-		exitLoad(this);
 		platformLoad(this);
+		boxLoad(this);
 	}
 
 	create() {
@@ -43,17 +42,14 @@ class LevelTwo extends Phaser.Scene {
 
 		//interacts
 		this.physics.add.collider(this.player, platforms);
-		this.physics.add.overlap(this.player, exit, () => {
-			goThroughExit(this, "Level Select");
-		});
 
-		//collision between box and platforms
-		this.physics.add.collider(this.box, platforms);
+		this.box = createBox(this, 500, 100, 1, 1, [this.player, platforms]);
 	}
 
 	update() {
 		playerControls(this);
+		boxUpdate(this.box);
 	}
 }
 
-export default LevelTwo;
+export default boxTestScene;
