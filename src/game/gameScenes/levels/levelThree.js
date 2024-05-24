@@ -1,22 +1,22 @@
 import Phaser from "phaser";
 
-import { boxLoad, createBox } from "../../assets/objects/box/box";
-import mC from "../../assets/images/character/pixilart-drawing.png";
 import playerVars from "../../util functions/playerVars";
 import playerControls from "../../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../../assets/objects/platforms/platform";
+import levelOneBg from "../../assets/images/backgrounds/level.jpg";
 import { exitLoad, createExit } from "../../assets/objects/exit/exit";
-import levelTwoBg from "../../assets/images/backgrounds/level2.jpg";
+import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
 
-class LevelTwo extends Phaser.Scene {
+class LevelThree extends Phaser.Scene {
 	constructor() {
-		super(`Level Two`);
+		super(`Level Three`);
 		playerVars(this);
 	}
 
 	preload() {
-		this.load.image(`player`, mC);
-		this.load.image("bg", levelTwoBg);
+		playerAnimPreload(this);
+		this.load.image("bg", levelOneBg);
+
 		exitLoad(this);
 		platformLoad(this);
 	}
@@ -26,34 +26,38 @@ class LevelTwo extends Phaser.Scene {
 		const platforms = platformObject(this);
 
 		//background
+
 		const bg = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "bg");
 		bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-		//exit
-
 		//player
-		this.player = this.physics.add.image(400, 250, `player`).setScale(1.6, 1.6);
-		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
+		this.player = this.physics.add.sprite(300, 300, "character").setScale(3, 3);
 
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 
+		playerAnimCreate(this);
+
 		//platforms
-		createPlatform(platforms, [400, 300], [2, 0.5]);
+		createPlatform(platforms, [420, 750], [2, 0.6]);
+		createPlatform(platforms, [700, 700], [2, 0.6]);
 
-		//interacts
+		//exit
+		this.exit1 = createExit(this, "Level Select", true, [700, 650], [1, 1]);
+
+		//interact
 		this.physics.add.collider(this.player, platforms);
-		this.physics.add.overlap(this.player, exit, () => {
-			goThroughExit(this, "Level Select");
-		});
 
-		//collision between box and platforms
-		this.physics.add.collider(this.box, platforms);
+		//layers
+		const layer = this.add.layer();
+		layer.add([this.player]);
+		layer.setDepth(1);
 	}
 
 	update() {
 		playerControls(this);
+		playerAnimUpdate(this);
 	}
 }
 
-export default LevelTwo;
+export default LevelThree;

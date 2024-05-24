@@ -1,9 +1,16 @@
-import LevelOne from "../game/gameScenes/levels/levelOne.js";
-import LevelSelect from "../game/gameScenes/levelSelect.js";
-import LevelTwo from "../game/gameScenes/levels/levelTwo.js";
 import Phaser from "phaser";
-import GabeScene from "../game/gameScenes/gabesTestScene.js";
-import TylersTestScene from "../game/gameScenes/testingScenes/tylersTestScene.js";
+
+import LevelSelect from "../game/gameScenes/levelSelect.js";
+import LevelOne from "../game/gameScenes/levels/levelOne.js";
+import LevelTwo from "../game/gameScenes/levels/levelTwo.js";
+import LevelThree from "../game/gameScenes/levels/levelThree.js";
+import LevelFour from "../game/gameScenes/levels/levelFour.js";
+import LevelFive from "../game/gameScenes/levels/levelFive.js";
+import LevelSix from "../game/gameScenes/levels/levelSix.js";
+import LevelSeven from "../game/gameScenes/levels/levelSeven.js";
+import LevelEight from "../game/gameScenes/levels/levelEight.js";
+import LevelNine from "../game/gameScenes/levels/levelNine.js";
+import LevelTen from "../game/gameScenes/levels/levelTen.js";
 
 class Game {
 	constructor() {
@@ -16,7 +23,7 @@ class Game {
 				type: Phaser.AUTO,
 				width: 1600,
 				height: 800,
-				scene: [LevelSelect, LevelOne, LevelTwo],
+				scene: [LevelSelect, LevelOne, LevelTwo, LevelThree, LevelFour, LevelFive, LevelSix, LevelSeven, LevelEight, LevelNine, LevelTen],
 				fps: {
 					target: 60,
 					forceSetTimeOut: true
