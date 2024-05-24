@@ -152,14 +152,16 @@ const playerAnimUpdate = (level) => {
       level.player.stop("runStart");
       level.player.play("idle");
     }
-    // console.log("movingR false")
+    // console.log(`movingR false ${level.player.body.velocity.x}`)
   }
   
   
   //the code below is the same as the ones above but for movement in the left, see above for detailed explaination 
 
   //if the character is moving left, make the image face left, and if they are on the ground start a running animation
-  if ((level.player.body.velocity.x < -10) && level.movingL === false) {
+
+
+  else if ((level.player.body.velocity.x < -10) && level.movingL === false) {
     // console.log("movingL true");
     if (!level.inAir) {
       level.player.play("runStart");
@@ -175,11 +177,12 @@ const playerAnimUpdate = (level) => {
   //if the character was moving left but has stopped, if they are on the ground play the idle animation
   else if (level.player.body.velocity.x > -10 && level.movingL === true) {
     level.movingL = false;
-    if (!level.inAir) {
+    if (!level.inAir && !level.movingR) {
       level.player.stop("runStart");
       level.player.play("idle");
     }
-    // console.log("movingL false");
+    // console.log(`movingL false ${level.player.body.velocity.x}`)
+
   }
 
   //if the "runStart" animation has completed, play "keep running animation"
