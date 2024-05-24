@@ -13,7 +13,6 @@ const createGarage = (level, [xPos, yPos], [xScale, yScale], collapseDir, collap
   garage.fixedY = yScale;
   garage.collapseDir = collapseDir;
   garage.collapseSpeed = collapseSpeed;
-  console.log(`${collapseDir} collapse dir`)
 
   if (collapseDir === 'LEFT') {
     garage.setOrigin(0);
