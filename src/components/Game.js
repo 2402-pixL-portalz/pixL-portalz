@@ -2,6 +2,7 @@ import LevelOne from "../game/gameScenes/levels/levelOne.js";
 import LevelSelect from "../game/gameScenes/levelSelect.js";
 import LevelTwo from "../game/gameScenes/levels/levelTwo.js";
 import Phaser from "phaser";
+import GabeScene from "../game/gameScenes/gabesTestScene.js";
 import TylersTestScene from "../game/gameScenes/testingScenes/tylersTestScene.js";
 
 class Game {
