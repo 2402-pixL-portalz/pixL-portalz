@@ -1,0 +1,84 @@
+html body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: url("https://rare-gallery.com/uploads/posts/4598949-artwork-simple-background-blue-stars-space-digital-art-space-art.jpg");
+  background-size: 210%;
+}
+
+/* Leave the below comment in until CSS is 100% */
+/* body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: url("https://rare-gallery.com/uploads/posts/4598949-artwork-simple-background-blue-stars-space-digital-art-space-art.jpg");
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
+} */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+button {
+  border-radius: 50%;
+  padding: 14px 40px;
+  margin-top: -30px;
+  margin-bottom: 6px;
+  font-size: 24px;
+  color: #ffffff;
+  border-style: solid;
+  border-color: #57A6A1;
+  background-color: #344C64;
+}
+
+.navHomeButton {
+  background-color: #344C64;
+}
+
+.navLoginButton {
+  background-color: #344C64;
+}
+
+.navRegisterButton {
+  background-color: #344C64;
+}
+
+.loginPageButton {
+  background-color: #344C64;
+}
+
+.registerPageButton {
+  background-color: #344C64;
+}
+
+.button:hover {
+  color: black;
+}
+
+canvas {
+  border-style: solid;
+  border-color: #57A6A1;
+}
+
+h1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: white;
+  font-size: 60px;
+}
+
+input {
+  width: 200px;
+  height: 25px;
+}
+
+label {
+  color: white;
+  font-size: 20px;
+}
+

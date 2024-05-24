@@ -1,25 +1,42 @@
 import exitImg from "../../images/exit/exit.png";
+import exitClosedImg from "../../images/exit/exitClosed.png";
 
-//preloads exit image
+//preloads exit images
 const exitLoad = (level) => {
-  level.load.image("exit", exitImg);
-}
+	level.load.image(`exit`, exitImg);
+	level.load.image(`exitClosed`, exitClosedImg);
+};
 
-//returns exit object details to a variable
-const exitObject = (level) => {
-  return level.physics.add.staticGroup();
-}
+//creates an exit which takes in the scene an array with the x/y positions, and an array with the length/height of the exit
+const createExit = (level, scene, isUnlocked, [xPosition, yPosition], [lengthScale, heightScale]) => {
+	const exit = level.physics.add.sprite(xPosition, yPosition, `exit`).setScale(lengthScale, heightScale);
+	exit.body.allowGravity = false;
+	setIsUnlocked(exit, isUnlocked);
 
-//creates an exit which takes in the exit object, and array with the x/y positions, and an array with the length/height of the exit 
-const createExit = (exit, [xPosition, yPosition], [lengthScale, heightScale]) => {
-  exit.create(xPosition, yPosition, "exit").setScale(lengthScale, heightScale).refreshBody();
-}
+	exit.pastIsUnlocked = exit.isUnlocked;
+	level.physics.add.overlap(exit, level.player, () => {
+		if ((level.controls.S.isDown || level.controls.DOWN.isDown) && exit.isUnlocked) {
+			level.scene.start(scene);
+		}
+	});
 
-//checks, when the player is overlapping with the exit, to see if the user is pressing down the S or DOWN key, if they are, it starts the scene provided in the parameters
-const goThroughExit = (level, scene) => {
-  if (level.controls.S.isDown || level.controls.DOWN.isDown) {
-    level.scene.start(scene);
-  }
-}
+	return exit;
+};
 
-export { exitLoad, exitObject, createExit, goThroughExit }
+const exitUpdate = (exit, switchValue) => {
+	if (exit.isUnlocked !== switchValue) {
+		setIsUnlocked(exit, switchValue);
+	}
+};
+
+const setIsUnlocked = (exit, status) => {
+	if (status) {
+		exit.isUnlocked = true;
+		exit.setTexture(`exit`);
+	} else {
+		exit.isUnlocked = false;
+		exit.setTexture(`exitClosed`);
+	}
+};
+
+export { exitLoad, createExit, exitUpdate, setIsUnlocked };

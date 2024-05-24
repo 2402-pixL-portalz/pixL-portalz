@@ -1,11 +1,12 @@
 import Phaser from "phaser";
-import mC from "../assets/images/character/pixilart-drawing.png";
-import playerVars from "../util functions/playerVars";
-import playerControls from "../util functions/playerControls";
-import { createPlatform, platformObject, platformLoad } from "../assets/objects/platforms/platform";
-import { exitLoad, exitObject, createExit, goThroughExit } from "../assets/objects/exit/exit";
-import levelTwoBg from "../assets/images/backgrounds/level2.jpg";
+
 import { boxLoad, createBox } from "../assets/objects/box/box";
+import mC from "../../assets/images/character/pixilart-drawing.png";
+import playerVars from "../../util functions/playerVars";
+import playerControls from "../../util functions/playerControls";
+import { createPlatform, platformObject, platformLoad } from "../../assets/objects/platforms/platform";
+import { exitLoad, createExit } from "../../assets/objects/exit/exit";
+import levelTwoBg from "../../assets/images/backgrounds/level2.jpg";
 
 class LevelTwo extends Phaser.Scene {
 	constructor() {
@@ -16,14 +17,13 @@ class LevelTwo extends Phaser.Scene {
 	preload() {
 		this.load.image(`player`, mC);
 		this.load.image("bg", levelTwoBg);
-		platformLoad(this);
 		exitLoad(this);
+		platformLoad(this);
 	}
 
 	create() {
 		//declarations
 		const platforms = platformObject(this);
-		const exit = exitObject(this);
 
 		//background
 		const bg = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "bg");

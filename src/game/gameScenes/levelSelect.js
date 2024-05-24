@@ -1,8 +1,8 @@
 import Phaser from "phaser";
-import mC from "../assets/images/character/pixilart-drawing.png"
 import playerVars from "../util functions/playerVars";
 import playerControls from "../util functions/playerControls";
-import { createExit, exitLoad, exitObject } from "../assets/objects/exit/exit";
+import { exitLoad, createExit, exitUpdate, setIsUnlocked } from "../assets/objects/exit/exit";
+import { playerAnimUpdate, playerAnimCreate, playerAnimPreload, } from "../util functions/playerAnims";
 import dayImage from "./../assets/images/backgrounds/day.png";
 import nightImage from "./../assets/images/backgrounds/night.png";
 
@@ -10,12 +10,12 @@ class LevelSelect extends Phaser.Scene {
 	constructor() {
 		super("Level Select");
 		playerVars(this);
+
 	}
 
 	preload() {
-		this.load.image(`player`, mC);
 		exitLoad(this);
-
+		playerAnimPreload(this);
 		this.load.image(`day`, dayImage);
 		this.load.image(`night`, nightImage);
 	}
@@ -29,21 +29,30 @@ class LevelSelect extends Phaser.Scene {
 		this.bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
 		//declarations
-		this.exit = exitObject(this);
+		const layer = this.add.layer();
+		
 
-		//exit
-		createExit(this.exit, [100, 570], [1, 1]);
 
+		
 		//player
-		this.player = this.physics.add.image(100, 500, `player`).setScale(1.6, 1.6);
+		this.player = this.physics.add.sprite(300, 300, "character").setScale(3, 3)
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
 
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
+		playerAnimCreate(this);
+		
+		//exit
+		this.exit1 = createExit(this, "Level One", true, [600,750], [1,1]);
+
+		//layering
+		layer.add([this.player]);
+		layer.setDepth(1);
 	}
 
 	update() {
 		playerControls(this);
+		playerAnimUpdate(this);
 	}
 }
 
