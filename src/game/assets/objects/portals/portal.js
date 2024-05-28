@@ -1,5 +1,10 @@
 import applyPortalTrajectory from "../../../util functions/applyPortalTrajectory";
 import bluePortalImage from "./../../images/portals/bluePortalSheet.png";
+import grayPortalImage from "./../../images/portals/grayPortalSpreadsheet.png";
+import greenPortalImage from "./../../images/portals/greenPortalSpreadsheet.png";
+import orangePortalImage from "./../../images/portals/orangePortalSpreadsheet.png";
+import pinkPortalImage from "./../../images/portals/pinkPortalSpreadsheet.png";
+import redPortalImage from "./../../images/portals/redPortalSpreadsheet.png";
 
 const portalVars = (This) => {
 	This.inPortal = false;
@@ -53,6 +58,214 @@ const createPortal = (This, color, x, y, rotation) => {
 
 	return portal;
 };
+
+//GRAY PORTAL
+const createPortal = (This, color, x, y, rotation) => {
+	let sheet;
+	if (color === `gray`) {
+		sheet = `grayPortalSpreadsheet`;
+	}
+
+	const portal = This.physics.add.sprite(x, y, sheet).setScale(0.2, 0.2);
+
+	portal.body.allowGravity = false;
+
+	if (!Object.hasOwn(This.anims.anims.entries, color)) {
+		This.anims.create({
+			key: color,
+			frames: This.anims.generateFrameNumbers(sheet),
+			frameRate: 20,
+			repeat: -1
+		});
+	}
+
+	portal.play(color);
+
+	if (rotation === `left`) {
+		portal.angle = 0;
+		portal.setSize(275, 475);
+	} else if (rotation === `right`) {
+		portal.angle = 180;
+		portal.setSize(275, 475);
+	} else if (rotation === `down`) {
+		portal.angle = 270;
+		portal.setSize(475, 275);
+	} else if (rotation === `up`) {
+		portal.angle = 90;
+		portal.setSize(475, 275);
+	}
+
+	return portal;
+};
+
+//GREEN PORTAL
+const createPortal = (This, color, x, y, rotation) => {
+	let sheet;
+	if (color === `green`) {
+		sheet = `greenPortalSpreadsheet`;
+	}
+
+	const portal = This.physics.add.sprite(x, y, sheet).setScale(0.2, 0.2);
+
+	portal.body.allowGravity = false;
+
+	if (!Object.hasOwn(This.anims.anims.entries, color)) {
+		This.anims.create({
+			key: color,
+			frames: This.anims.generateFrameNumbers(sheet),
+			frameRate: 20,
+			repeat: -1
+		});
+	}
+
+	portal.play(color);
+
+	if (rotation === `left`) {
+		portal.angle = 0;
+		portal.setSize(275, 475);
+	} else if (rotation === `right`) {
+		portal.angle = 180;
+		portal.setSize(275, 475);
+	} else if (rotation === `down`) {
+		portal.angle = 270;
+		portal.setSize(475, 275);
+	} else if (rotation === `up`) {
+		portal.angle = 90;
+		portal.setSize(475, 275);
+	}
+
+	return portal;
+};
+
+//ORANGE PORTAL
+const createPortal = (This, color, x, y, rotation) => {
+	let sheet;
+	if (color === `orange`) {
+		sheet = `orangePortalSpreadsheet`;
+	}
+
+	const portal = This.physics.add.sprite(x, y, sheet).setScale(0.2, 0.2);
+
+	portal.body.allowGravity = false;
+
+	if (!Object.hasOwn(This.anims.anims.entries, color)) {
+		This.anims.create({
+			key: color,
+			frames: This.anims.generateFrameNumbers(sheet),
+			frameRate: 20,
+			repeat: -1
+		});
+	}
+
+	portal.play(color);
+
+	if (rotation === `left`) {
+		portal.angle = 0;
+		portal.setSize(275, 475);
+	} else if (rotation === `right`) {
+		portal.angle = 180;
+		portal.setSize(275, 475);
+	} else if (rotation === `down`) {
+		portal.angle = 270;
+		portal.setSize(475, 275);
+	} else if (rotation === `up`) {
+		portal.angle = 90;
+		portal.setSize(475, 275);
+	}
+
+	return portal;
+};
+
+//PINK LADY
+const createPortal = (This, color, x, y, rotation) => {
+	let sheet;
+	if (color === `pink`) {
+		sheet = `pinkPortalSpreadsheet`;
+	}
+
+	const portal = This.physics.add.sprite(x, y, sheet).setScale(0.2, 0.2);
+
+	portal.body.allowGravity = false;
+
+	if (!Object.hasOwn(This.anims.anims.entries, color)) {
+		This.anims.create({
+			key: color,
+			frames: This.anims.generateFrameNumbers(sheet),
+			frameRate: 20,
+			repeat: -1
+		});
+	}
+
+	portal.play(color);
+
+	if (rotation === `left`) {
+		portal.angle = 0;
+		portal.setSize(275, 475);
+	} else if (rotation === `right`) {
+		portal.angle = 180;
+		portal.setSize(275, 475);
+	} else if (rotation === `down`) {
+		portal.angle = 270;
+		portal.setSize(475, 275);
+	} else if (rotation === `up`) {
+		portal.angle = 90;
+		portal.setSize(475, 275);
+	}
+
+	return portal;
+};
+
+//RED PORTAL
+const createPortal = (This, color, x, y, rotation) => {
+	let sheet;
+	if (color === `red`) {
+		sheet = `redPortalSpreadsheet`;
+	}
+
+	const portal = This.physics.add.sprite(x, y, sheet).setScale(0.2, 0.2);
+
+	portal.body.allowGravity = false;
+
+	if (!Object.hasOwn(This.anims.anims.entries, color)) {
+		This.anims.create({
+			key: color,
+			frames: This.anims.generateFrameNumbers(sheet),
+			frameRate: 20,
+			repeat: -1
+		});
+	}
+
+	portal.play(color);
+
+	if (rotation === `left`) {
+		portal.angle = 0;
+		portal.setSize(275, 475);
+	} else if (rotation === `right`) {
+		portal.angle = 180;
+		portal.setSize(275, 475);
+	} else if (rotation === `down`) {
+		portal.angle = 270;
+		portal.setSize(475, 275);
+	} else if (rotation === `up`) {
+		portal.angle = 90;
+		portal.setSize(475, 275);
+	}
+
+	return portal;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const joinPortals = (This, enteringPortal, exitingPortal, objectsAllowedToOverlap) => {
 	addTeleportingOverlap(This, enteringPortal, exitingPortal, objectsAllowedToOverlap);
