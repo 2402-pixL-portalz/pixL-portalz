@@ -6,8 +6,11 @@ import { createPlatform, platformObject, platformLoad } from "../../assets/objec
 import levelOneBg from "../../assets/images/backgrounds/level.jpg";
 import jumpInst from "../../assets/images/instructions/toJump.png";
 import moveInst from "../../assets/images/instructions/toMove.png";
+import exitInst from "../../assets/images/instructions/exitSign.png";
+import resetInst from "../../assets/images/instructions/resetInstructions.png";
 import { exitLoad, exitUpdate, createExit, setIsUnlocked} from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
+
 
 class LevelOne extends Phaser.Scene {
 	constructor() {
@@ -21,8 +24,9 @@ class LevelOne extends Phaser.Scene {
 		this.load.image("bg", levelOneBg);
 		this.load.image("jump instructions", jumpInst);
 		this.load.image("move instructions", moveInst);
+		this.load.image("exit instructions", exitInst);
+		this.load.image("reset instructions", resetInst);
 		platformLoad(this);
-	
 	}
 
 	create() {
@@ -37,12 +41,13 @@ class LevelOne extends Phaser.Scene {
 		//instructions
 		this.add.image(400, 700, "jump instructions").setScale(1.3, 1.3);
 		this.add.image(100, 700, "move instructions").setScale(1.3, 1.3);
+		const exitSign = this.add.image(1485,60, "exit instructions").setScale(1.3,1.3);
+		this.add.image(850, 400, "reset instructions").setScale(1.5,1.5);
 		
 
 		//player
-		this.player = this.physics.add.sprite(300, 300, "character").setScale(3, 3)
+		this.player = this.physics.add.sprite(100, 750, "character").setScale(3, 3)
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
-
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 
@@ -50,18 +55,35 @@ class LevelOne extends Phaser.Scene {
 
 		//platforms
 		createPlatform(platforms, [420, 750], [2, 0.6]);
-		createPlatform(platforms, [700, 700], [2, 0.6]);
+		createPlatform(platforms, [700, 650], [2, 0.6]);
+		createPlatform(platforms, [1040, 650], [1.3, 0.6]);
+		createPlatform(platforms, [1440, 550], [4, 0.6]);
+		createPlatform(platforms, [1040, 450], [1.3, 0.6]);
+		createPlatform(platforms, [700, 450], [2, 0.6]);
+		createPlatform(platforms, [420, 350], [2, 0.6]);
+		createPlatform(platforms, [120, 300], [3, 0.6]);
+		createPlatform(platforms, [470, 230], [1, 0.6]);
+		createPlatform(platforms, [690, 230], [1, 0.6]);
+		createPlatform(platforms, [840, 230], [.3, 0.6]);
+		createPlatform(platforms, [940, 230], [.2, 0.6]);
+		createPlatform(platforms, [1080, 230], [.2, 0.6]);
+		createPlatform(platforms, [1320, 230], [.2, 0.6]);
+		createPlatform(platforms, [1480, 130], [3, 0.6]);
+
+				//floor
+		createPlatform(platforms, [800, 800,], [20,0.9]);
 
 		//exit
-		this.exit1 = createExit(this, "Level Select", true, [700,650], [1,1]);
+		this.exit1 = createExit(this, "Level Select", true, [1480, 85], [1,1]);
 
 		//interact
 		this.physics.add.collider(this.player, platforms);
 
 		//layers
 		const layer = this.add.layer();
-		layer.add([this.player]);
+		layer.add([exitSign, this.player]);
 		layer.setDepth(1);
+
 	}
 
 	update() {
