@@ -6,9 +6,11 @@ import { createPlatform, platformObject, platformLoad } from "../../assets/objec
 import levelOneBg from "../../assets/images/backgrounds/level.jpg";
 import jumpInst from "../../assets/images/instructions/toJump.png";
 import moveInst from "../../assets/images/instructions/toMove.png";
+import exitInst from "../../assets/images/instructions/exitSign.png";
+import resetInst from "../../assets/images/instructions/resetInstructions.png";
 import { exitLoad, exitUpdate, createExit, setIsUnlocked} from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
-import { Collide, collidePre } from "../../util functions/collide";
+
 
 class LevelOne extends Phaser.Scene {
 	constructor() {
@@ -22,9 +24,9 @@ class LevelOne extends Phaser.Scene {
 		this.load.image("bg", levelOneBg);
 		this.load.image("jump instructions", jumpInst);
 		this.load.image("move instructions", moveInst);
+		this.load.image("exit instructions", exitInst);
+		this.load.image("reset instructions", resetInst);
 		platformLoad(this);
-		collidePre(this);
-	
 	}
 
 	create() {
@@ -39,12 +41,13 @@ class LevelOne extends Phaser.Scene {
 		//instructions
 		this.add.image(400, 700, "jump instructions").setScale(1.3, 1.3);
 		this.add.image(100, 700, "move instructions").setScale(1.3, 1.3);
+		const exitSign = this.add.image(1485,60, "exit instructions").setScale(1.3,1.3);
+		this.add.image(850, 400, "reset instructions").setScale(1.5,1.5);
 		
 
 		//player
 		this.player = this.physics.add.sprite(100, 750, "character").setScale(3, 3)
 		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
-
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 
@@ -78,11 +81,8 @@ class LevelOne extends Phaser.Scene {
 
 		//layers
 		const layer = this.add.layer();
-		layer.add([this.player]);
+		layer.add([exitSign, this.player]);
 		layer.setDepth(1);
-
-		Collide(this);
-
 
 	}
 
