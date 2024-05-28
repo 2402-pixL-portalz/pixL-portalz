@@ -5,16 +5,21 @@ import { exitLoad, createExit, exitUpdate, setIsUnlocked } from "../assets/objec
 import { playerAnimUpdate, playerAnimCreate, playerAnimPreload } from "../util functions/playerAnims";
 import dayImage from "./../assets/images/backgrounds/day.png";
 import nightImage from "./../assets/images/backgrounds/night.png";
+import { createPlatform, platformLoad, platformObject } from "../assets/objects/platforms/platform";
+import { createPortal, joinPortals, portalLoad, portalUpdate, portalVars } from "../assets/objects/portals/portal";
 
 class LevelSelect extends Phaser.Scene {
 	constructor() {
 		super("Level Select");
 		playerVars(this);
+		portalVars(this);
 	}
 
 	preload() {
-		exitLoad(this);
 		playerAnimPreload(this);
+		exitLoad(this);
+		platformLoad(this);
+		portalLoad(this, `blue`);
 		this.load.image(`day`, dayImage);
 		this.load.image(`night`, nightImage);
 	}
@@ -29,26 +34,47 @@ class LevelSelect extends Phaser.Scene {
 
 		//declarations
 		const layer = this.add.layer();
+		const platforms = platformObject(this);
+
+		createPlatform(platforms, [800, 800], [20, 0.9]);
+		createPlatform(platforms, [800, 400], [20, 0.9]);
 
 		//player
-		this.player = this.physics.add.sprite(300, 300, "character").setScale(3, 3);
-		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
+		this.player = this.physics.add.sprite(200, 600, "character").setScale(3, 3);
 
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
 		playerAnimCreate(this);
 
 		//exit
-		this.exit1 = createExit(this, "Level One", true, [600, 750], [1, 1]);
+		this.exit1 = createExit(this, "Level One", true, [(this.sys.game.config.width / 7) * 2, 715], [2, 2]);
+		this.exit2 = createExit(this, "Level Two", true, [(this.sys.game.config.width / 7) * 3, 715], [2, 2]);
+		this.exit3 = createExit(this, "Level Three", true, [(this.sys.game.config.width / 7) * 4, 715], [2, 2]);
+		this.exit4 = createExit(this, "Level Four", false, [(this.sys.game.config.width / 7) * 5, 715], [2, 2]);
+		this.exit5 = createExit(this, "Level Five", false, [(this.sys.game.config.width / 7) * 6, 715], [2, 2]);
+
+		this.exit6 = createExit(this, "Level One", false, [(this.sys.game.config.width / 7) * 2, 315], [2, 2]);
+		this.exit7 = createExit(this, "Level Two", false, [(this.sys.game.config.width / 7) * 3, 315], [2, 2]);
+		this.exit8 = createExit(this, "Level Three", false, [(this.sys.game.config.width / 7) * 4, 315], [2, 2]);
+		this.exit9 = createExit(this, "Level Four", false, [(this.sys.game.config.width / 7) * 5, 315], [2, 2]);
+		this.exit10 = createExit(this, "Level Five", false, [(this.sys.game.config.width / 7) * 6, 315], [2, 2]);
+
+		this.portal1 = createPortal(this, `blue`, 30, this.sys.game.config.height - 60, `right`);
+		this.portal2 = createPortal(this, `blue`, 30, this.sys.game.config.height / 2 - 60, `right`);
+
+		joinPortals(this, this.portal1, this.portal2, this.player);
 
 		//layering
 		layer.add([this.player]);
 		layer.setDepth(1);
+
+		this.physics.add.collider(this.player, platforms);
 	}
 
 	update() {
 		playerControls(this);
 		playerAnimUpdate(this);
+		portalUpdate(this);
 	}
 }
 
