@@ -7,6 +7,7 @@ import dayImage from "./../assets/images/backgrounds/day.png";
 import nightImage from "./../assets/images/backgrounds/night.png";
 import { createPlatform, platformLoad, platformObject } from "../assets/objects/platforms/platform";
 import { createPortal, joinPortals, portalLoad, portalUpdate, portalVars } from "../assets/objects/portals/portal";
+import resettingFunctionality from "../util functions/resettingFunctionality";
 
 class LevelSelect extends Phaser.Scene {
 	constructor() {
@@ -43,7 +44,7 @@ class LevelSelect extends Phaser.Scene {
 		this.player = this.physics.add.sprite(200, 600, "character").setScale(3, 3);
 
 		this.player.setCollideWorldBounds(true);
-		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
+		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE,R`);
 		playerAnimCreate(this);
 
 		//exit
@@ -75,6 +76,7 @@ class LevelSelect extends Phaser.Scene {
 		playerControls(this);
 		playerAnimUpdate(this);
 		portalUpdate(this);
+		resettingFunctionality(this);
 	}
 }
 
