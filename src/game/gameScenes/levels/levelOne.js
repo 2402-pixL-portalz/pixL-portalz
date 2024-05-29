@@ -70,7 +70,7 @@ class LevelOne extends Phaser.Scene {
 		createPlatform(platforms, [1320, 230], [.2, 0.6]);
 		createPlatform(platforms, [1480, 130], [3, 0.6]);
 
-				//floor
+		//floor
 		createPlatform(platforms, [800, 800,], [20,0.9]);
 
 		//exit
