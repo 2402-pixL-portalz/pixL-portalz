@@ -2,7 +2,7 @@ import Phaser from "phaser";
 
 import playerVars from "../../util functions/playerVars";
 import playerControls from "../../util functions/playerControls";
-import { platformObject, platformLoad } from "../../assets/objects/platforms/platform";
+import { createPlatform, platformObject, platformLoad } from "../../assets/objects/platforms/platform";
 import levelOneBg from "../../assets/images/backgrounds/level.jpg";
 import { exitLoad, createExit } from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
@@ -50,15 +50,20 @@ class LevelTwo extends Phaser.Scene {
 		this.box = createBox(this, 1000, 400, 1, 1, platforms);
 
 		//button
-		this.button = createButton(this, 600, 800, 1, 1);
+		this.button = createButton(this, 600, 792, 1, 1);
 		addButtonOverlap(this, this.button, [this.player, this.box]);
 		
 
 		//exit
 		this.exit1 = createExit(this, "Level Select", true, [1400, 750], [1, 1]);
 
+    this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
+
 		//garage
-		this.garage = createGarage(this, [1400, 700], [2, 1], 'UP', 0.01);
+		this.garage = createGarage(this, [1400, 691], [2, 1], 'UP', 0.01);
+
+    //floor
+		createPlatform(platforms, [800, 800,], [20,0.9]);
 		
 
 		//interact
@@ -68,7 +73,7 @@ class LevelTwo extends Phaser.Scene {
 
 		//layers
 		const layer = this.add.layer();
-		layer.add([this.player, this.box, this.button, this.exit1, this.garage]);
+		layer.add([this.player, this.box, this.button, this.garage]);
 		layer.setDepth(1);
 	}
 
