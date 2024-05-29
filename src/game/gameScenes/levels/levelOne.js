@@ -39,8 +39,8 @@ class LevelOne extends Phaser.Scene {
 		bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
 		//instructions
-		this.add.image(400, 700, "jump instructions").setScale(1.3, 1.3);
-		this.add.image(100, 700, "move instructions").setScale(1.3, 1.3);
+		this.add.image(400, 600, "jump instructions").setScale(1.3, 1.3);
+		this.add.image(100, 600, "move instructions").setScale(1.3, 1.3);
 		const exitSign = this.add.image(1485,60, "exit instructions").setScale(1.3,1.3);
 		this.add.image(850, 400, "reset instructions").setScale(1.5,1.5);
 		
@@ -75,6 +75,8 @@ class LevelOne extends Phaser.Scene {
 
 		//exit
 		this.exit1 = createExit(this, "Level Select", true, [1480, 85], [1,1]);
+
+    this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
 
 		//interact
 		this.physics.add.collider(this.player, platforms);

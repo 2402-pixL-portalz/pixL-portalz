@@ -57,6 +57,8 @@ class LevelTwo extends Phaser.Scene {
 		//exit
 		this.exit1 = createExit(this, "Level Select", true, [1400, 750], [1, 1]);
 
+    this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
+
 		//garage
 		this.garage = createGarage(this, [1400, 700], [2, 1], 'UP', 0.01);
 		
