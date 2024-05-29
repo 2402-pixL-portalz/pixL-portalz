@@ -1,24 +1,32 @@
 import Phaser from "phaser";
 
-import { boxLoad, createBox } from "../../assets/objects/box/box";
-import mC from "../../assets/images/character/pixilart-drawing.png";
 import playerVars from "../../util functions/playerVars";
 import playerControls from "../../util functions/playerControls";
-import { createPlatform, platformObject, platformLoad } from "../../assets/objects/platforms/platform";
+import { platformObject, platformLoad } from "../../assets/objects/platforms/platform";
+import levelOneBg from "../../assets/images/backgrounds/level.jpg";
 import { exitLoad, createExit } from "../../assets/objects/exit/exit";
-import levelTwoBg from "../../assets/images/backgrounds/level2.jpg";
+import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
+import { boxLoad, createBox, boxUpdate } from "../../assets/objects/box/box";
+import { buttonLoad, createButton, buttonUpdate, buttonVars, addButtonOverlap } from "../../assets/objects/buttons/button";
+import { garageLoad, createGarage, garageUpdate } from "../../assets/objects/garage/garage";
+import resettingFunctionality from "../../util functions/resettingFunctionality";
 
 class LevelTwo extends Phaser.Scene {
 	constructor() {
 		super(`Level Two`);
 		playerVars(this);
+		buttonVars(this);
 	}
 
 	preload() {
-		this.load.image(`player`, mC);
-		this.load.image("bg", levelTwoBg);
+		playerAnimPreload(this);
+		this.load.image("bg", levelOneBg);
+
 		exitLoad(this);
 		platformLoad(this);
+		boxLoad(this);
+		buttonLoad(this);
+		garageLoad(this);
 	}
 
 	create() {
@@ -26,33 +34,52 @@ class LevelTwo extends Phaser.Scene {
 		const platforms = platformObject(this);
 
 		//background
+
 		const bg = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "bg");
 		bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-		//exit
-
 		//player
-		this.player = this.physics.add.image(400, 250, `player`).setScale(1.6, 1.6);
-		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
+		this.player = this.physics.add.sprite(300, 300, "character").setScale(3, 3);
 
 		this.player.setCollideWorldBounds(true);
-		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
+		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE,R`);
 
-		//platforms
-		createPlatform(platforms, [400, 300], [2, 0.5]);
+		playerAnimCreate(this);
 
-		//interacts
+		//box
+		this.box = createBox(this, 1000, 400, 1, 1, platforms);
+
+		//button
+		this.button = createButton(this, 600, 800, 1, 1);
+		addButtonOverlap(this, this.button, [this.player, this.box]);
+		
+
+		//exit
+		this.exit1 = createExit(this, "Level Select", true, [1400, 750], [1, 1]);
+
+		//garage
+		this.garage = createGarage(this, [1400, 700], [2, 1], 'UP', 0.01);
+		
+
+		//interact
 		this.physics.add.collider(this.player, platforms);
-		this.physics.add.overlap(this.player, exit, () => {
-			goThroughExit(this, "Level Select");
-		});
-
-		//collision between box and platforms
 		this.physics.add.collider(this.box, platforms);
+		this.physics.add.collider(this.player, this.box);
+
+		//layers
+		const layer = this.add.layer();
+		layer.add([this.player, this.box, this.button, this.exit1, this.garage]);
+		layer.setDepth(1);
 	}
 
 	update() {
 		playerControls(this);
+		playerAnimUpdate(this);
+		boxUpdate(this.box);
+		buttonUpdate(this);
+		garageUpdate(this.garage, this.button.isPressed);
+		resettingFunctionality(this);
+
 	}
 }
 
