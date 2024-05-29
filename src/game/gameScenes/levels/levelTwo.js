@@ -9,6 +9,7 @@ import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../uti
 import { boxLoad, createBox, boxUpdate } from "../../assets/objects/box/box";
 import { buttonLoad, createButton, buttonUpdate, buttonVars, addButtonOverlap } from "../../assets/objects/buttons/button";
 import { garageLoad, createGarage, garageUpdate } from "../../assets/objects/garage/garage";
+import resettingFunctionality from "../../util functions/resettingFunctionality";
 
 class LevelTwo extends Phaser.Scene {
 	constructor() {
@@ -56,9 +57,6 @@ class LevelTwo extends Phaser.Scene {
 		//exit
 		this.exit1 = createExit(this, "Level Select", true, [1400, 750], [1, 1]);
 
-		//hide exit
-		this.exit1.setVisible(false);
-
 		//garage
 		this.garage = createGarage(this, [1400, 700], [2, 1], 'UP', 0.01);
 		
@@ -70,7 +68,7 @@ class LevelTwo extends Phaser.Scene {
 
 		//layers
 		const layer = this.add.layer();
-		layer.add([this.player, this.box, this.button, this.garage, this.exit1]);
+		layer.add([this.player, this.box, this.button, this.exit1, this.garage]);
 		layer.setDepth(1);
 	}
 
@@ -80,12 +78,8 @@ class LevelTwo extends Phaser.Scene {
 		boxUpdate(this.box);
 		buttonUpdate(this);
 		garageUpdate(this.garage, this.button.isPressed);
+		resettingFunctionality(this);
 
-		if(this.garage.scaleY < 0.1) {
-			this.exit1.setVisible(true);
-		} else {
-			this.exit1.setVisible(false);
-		}
 	}
 }
 
