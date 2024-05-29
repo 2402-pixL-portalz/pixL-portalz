@@ -79,31 +79,33 @@ const createPortal = (This, color, x, y, rotation) => {
 	return portal;
 };
 
-
-const joinPortals = (This, enteringPortal, exitingPortal, objectsAllowedToOverlap) => {
-	addTeleportingOverlap(This, enteringPortal, exitingPortal, objectsAllowedToOverlap);
-	addTeleportingOverlap(This, exitingPortal, enteringPortal, objectsAllowedToOverlap);
+const joinPortals = (This, enteringPortal, exitingPortal, objectsAllowedToTeleport) => {
+	This.objectsAllowedToTeleport = objectsAllowedToTeleport;
+	addTeleportingOverlap(This, enteringPortal, exitingPortal, objectsAllowedToTeleport);
+	addTeleportingOverlap(This, exitingPortal, enteringPortal, objectsAllowedToTeleport);
 };
 
-const addTeleportingOverlap = (This, portal1, portal2, objectsAllowedToOverlap) => {
-	This.physics.add.overlap(portal1, objectsAllowedToOverlap, (obj1, item) => {
-		if (!This.inPortal) {
-			This.inPortal = true;
+const addTeleportingOverlap = (This, portal1, portal2, objectsAllowedToTeleport) => {
+	This.physics.add.overlap(portal1, objectsAllowedToTeleport, (obj1, item) => {
+		if (!item.inPortal) {
+			item.inPortal = true;
 			item.setPosition(portal2.x, portal2.y);
 
 			applyPortalTrajectory(portal1, portal2, item);
 		}
-		This.currentInPortalNumber++;
+		item.currentInPortalNumber++;
 	});
 };
 
 const portalUpdate = (This) => {
-	if (This.inPortal && This.currentInPortalNumber !== This.pastInPortalNumber) {
-		This.pastInPortalNumber = This.currentInPortalNumber;
-	} else {
-		This.inPortal = false;
-		This.currentInPortalNumber = 0;
-		This.pastInPortalNumber = 0;
+	for (let obj of This.objectsAllowedToTeleport) {
+		if (obj.inPortal && obj.currentInPortalNumber !== obj.pastInPortalNumber) {
+			obj.pastInPortalNumber = obj.currentInPortalNumber;
+		} else {
+			obj.inPortal = false;
+			obj.currentInPortalNumber = 0;
+			obj.pastInPortalNumber = 0;
+		}
 	}
 };
 
