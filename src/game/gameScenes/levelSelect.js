@@ -63,7 +63,7 @@ class LevelSelect extends Phaser.Scene {
 		this.portal1 = createPortal(this, `blue`, 30, this.sys.game.config.height - 60, `right`);
 		this.portal2 = createPortal(this, `blue`, 30, this.sys.game.config.height / 2 - 60, `right`);
 
-		joinPortals(this, this.portal1, this.portal2, this.player);
+		joinPortals(this, this.portal1, this.portal2, [this.player]);
 
 		//layering
 		layer.add([this.player]);
