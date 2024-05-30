@@ -8,7 +8,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("pressed");
+    //console.log("pressed");
     try {
       const result = await fetch('/api/v1/auth/register', {
         method: 'POST',
