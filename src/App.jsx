@@ -6,8 +6,11 @@ import Register from "./pages/Register";
 
 import { Route, Routes } from "react-router-dom";
 
+
+
 function App() {
 	const game = new Game();
+
 
 	return (
 		<>
@@ -16,10 +19,14 @@ function App() {
 			<Routes>
 				<Route path="/Login" element={<Login />} />
 				<Route path="/Register" element={<Register />} />
-				<Route path="/" element={<GamePage game={game} />} />
+				<Route path="/" element={<GamePage game={game}/>} />
 			</Routes>
 		</>
 	);
+
+	
 }
 
 export default App;
+
+

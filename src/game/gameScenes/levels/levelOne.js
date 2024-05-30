@@ -74,7 +74,8 @@ class LevelOne extends Phaser.Scene {
 		createPlatform(platforms, [800, 800,], [20,0.9]);
 
 		//exit
-		this.exit1 = createExit(this, "Level Select", true, [1480, 85], [1,1]);
+		// this.exit1 = createExit(this, "Level Select", true, [1480, 85], [1,1], 1);
+		this.exit1 = createExit(this, "Level Select", true, [180, 785], [1,1], 1);
 
 		//interact
 		this.physics.add.collider(this.player, platforms);

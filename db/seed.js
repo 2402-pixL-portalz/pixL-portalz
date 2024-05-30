@@ -38,6 +38,7 @@ const syncAndSeed = async () => {
 			for (let j = 0; j < process.env.NUM_OF_SEED_LEVELS; j++) {
 				await prisma.levels.create({
 					data: {
+						levelNum: j+1,
 						isCompleted: Math.round(Math.random()) <= 0.5,
 						achievements: howManyLevelsAreCompleted,
 						userId: i

@@ -8,15 +8,27 @@ const saltRounds = 10;
 const registerUser = async (username, password) => {
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+   
+
+
+
     const newUser = await prisma.users.create({
       data: {
         username,
         password: hashedPassword,
         levels: {
           create: [
-            { isCompleted: false, achievements: 0 },
-            { isCompleted: false, achievements: 0 },
-            { isCompleted: false, achievements: 0 },
+            { levelNum: 1, isCompleted: false, achievements: 0 },
+            { levelNum: 2, isCompleted: false, achievements: 0 },
+            { levelNum: 3, isCompleted: false, achievements: 0 },
+            { levelNum: 4, isCompleted: false, achievements: 0 },
+            { levelNum: 5, isCompleted: false, achievements: 0 },
+            { levelNum: 6, isCompleted: false, achievements: 0 },
+            { levelNum: 7, isCompleted: false, achievements: 0 },
+            { levelNum: 8, isCompleted: false, achievements: 0 },
+            { levelNum: 9, isCompleted: false, achievements: 0 },
+            { levelNum: 10, isCompleted: false, achievements: 0 },
+          
           ],
         },
       },
