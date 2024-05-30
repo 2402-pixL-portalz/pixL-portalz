@@ -9,6 +9,8 @@ import { playerAnimUpdate, playerAnimCreate, playerAnimPreload } from "../util f
 import { createGarage, garageLoad, garageUpdate } from "../assets/objects/garage/garage";
 import { buttonVars, buttonLoad, buttonUpdate, createButton, addButtonOverlap} from "../assets/objects/buttons/button";
 import backgroundMusic from "../assets/audio/background/metal-bar.mp3"; //change the mp3 file
+import { boxLoad, boxUpdate, createBox } from "../assets/objects/box/box";
+import { rayLoad, rayCreate, rayUpdate } from "../util functions/ray";
 
 class GabeScene extends Phaser.Scene {
   constructor() {
@@ -27,6 +29,9 @@ class GabeScene extends Phaser.Scene {
     garageLoad(this);
     buttonLoad(this);
     this.load.audio("backgroundMusic", backgroundMusic);
+    boxLoad(this);
+    rayLoad(this);
+    
   }
 
 
@@ -55,13 +60,15 @@ class GabeScene extends Phaser.Scene {
 
     createPlatform(platforms, [700, 750], [2, 1]);
 
+    createPlatform(platforms, [100,100], [.5,.5]);
+
     //animations
 
     playerAnimCreate(this);
 
     //portals 
-    this.myPortal = createPortal(this, `blue`, this.sys.game.config.width / 4, this.sys.game.config.height - 100, `down`);
-    this.myPortal2 = createPortal(this, `blue`, this.sys.game.config.width / 4, this.sys.game.config.height - 500, `down`);
+    // this.myPortal = createPortal(this, `blue`, this.sys.game.config.width / 4, this.sys.game.config.height - 100, `down`);
+    // this.myPortal2 = createPortal(this, `blue`, this.sys.game.config.width / 4, this.sys.game.config.height - 500, `down`);
 
     
 
@@ -82,21 +89,30 @@ class GabeScene extends Phaser.Scene {
 
     //audio
     this.backgroundMusic = this.sound.add("backgroundMusic");
-    this.backgroundMusic.play();
+    // this.backgroundMusic.play();
 
-    
+    //box?
+    this.box1 = createBox(this, 500,500,1,1,this.player.body);
+
+    this.ray = rayCreate(this, this.box1);
+
+    console.log(this.player.body);
+
+
+
   }
 
   update() {
-
+    
     playerControls(this);
     playerAnimUpdate(this);
-    portalUpdate(this);
+    boxUpdate(this.box1);
+    // portalUpdate(this);
     buttonUpdate(this, this.myButton);
     garageUpdate(this.garage1, this.myButton.isPressed);
     garageUpdate(this.garage2, this.myButton.isPressed);
     garageUpdate(this.garage3, this.myButton.isPressed);
-
+    rayUpdate(this.ray, this);
     
 
     
