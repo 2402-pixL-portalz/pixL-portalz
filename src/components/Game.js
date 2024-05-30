@@ -23,7 +23,7 @@ class Game {
 				type: Phaser.AUTO,
 				width: 1600,
 				height: 800,
-				scene: [ LevelSelect, LevelOne, LevelTwo, LevelThree, LevelFour, LevelFive, LevelSix, LevelSeven, LevelEight, LevelNine, LevelTen],
+				scene: [ LevelFour, LevelSelect, LevelOne, LevelTwo, LevelThree, LevelFive, LevelSix, LevelSeven, LevelEight, LevelNine, LevelTen],
 				fps: {
 					target: 60,
 					forceSetTimeOut: true
