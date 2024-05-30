@@ -50,21 +50,19 @@ class LevelTwo extends Phaser.Scene {
 		this.box = createBox(this, 1000, 400, 1, 1, platforms);
 
 		//button
-		this.button = createButton(this, 600, 792, 1, 1);
+		this.button = createButton(this, 600, 787, 1, 1);
 		addButtonOverlap(this, this.button, [this.player, this.box]);
-		
 
 		//exit
 		this.exit1 = createExit(this, "Level Select", true, [1400, 750], [1, 1]);
 
-    this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
+		this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
 
 		//garage
-		this.garage = createGarage(this, [1400, 691], [2, 1], 'UP', 0.01);
+		this.garage = createGarage(this, [1400, 691], [2, 1], "UP", 0.01);
 
-    //floor
-		createPlatform(platforms, [800, 800,], [20,0.9]);
-		
+		//floor
+		createPlatform(platforms, [800, 800], [20, 0.9]);
 
 		//interact
 		this.physics.add.collider(this.player, platforms);
@@ -84,7 +82,6 @@ class LevelTwo extends Phaser.Scene {
 		buttonUpdate(this);
 		garageUpdate(this.garage, this.button.isPressed);
 		resettingFunctionality(this);
-
 	}
 }
 
