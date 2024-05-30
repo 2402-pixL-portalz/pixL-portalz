@@ -1,5 +1,10 @@
 import applyPortalTrajectory from "../../../util functions/applyPortalTrajectory";
 import bluePortalImage from "./../../images/portals/bluePortalSheet.png";
+import grayPortalImage from "./../../images/portals/grayPortalSheet.png";
+import greenPortalImage from "./../../images/portals/greenPortalSheet.png";
+import orangePortalImage from "./../../images/portals/orangePortalSheet.png";
+import pinkPortalImage from "./../../images/portals/pinkPortalSheet.png";
+import redPortalImage from "./../../images/portals/redPortalSheet.png";
 
 const portalVars = (This) => {
 	This.inPortal = false;
@@ -10,6 +15,16 @@ const portalVars = (This) => {
 const portalLoad = (This, color) => {
 	if (color === `blue`) {
 		This.load.spritesheet(`bluePortalSheet`, bluePortalImage, { frameWidth: 498, frameHeight: 498 });
+	} else if (color === `gray`) {
+		This.load.spritesheet(`grayPortalSheet`, grayPortalImage, { frameWidth: 498, frameHeight: 498 });
+	} else if (color === `green`) {
+		This.load.spritesheet(`greenPortalSheet`, greenPortalImage, { frameWidth: 498, frameHeight: 498 });
+	} else if (color === `orange`) {
+		This.load.spritesheet(`orangePortalSheet`, orangePortalImage, { frameWidth: 498, frameHeight: 498 });
+	} else if (color === `pink`) {
+		This.load.spritesheet(`pinkPortalSheet`, pinkPortalImage, { frameWidth: 498, frameHeight: 498 });
+	} else if (color === `red`) {
+		This.load.spritesheet(`redPortalSheet`, redPortalImage, { frameWidth: 498, frameHeight: 498 });
 	} else {
 		throw `We do not support this portal color!`;
 	}
@@ -20,6 +35,16 @@ const createPortal = (This, color, x, y, rotation) => {
 	let sheet;
 	if (color === `blue`) {
 		sheet = `bluePortalSheet`;
+	} else if (color === `gray`) {
+		sheet = `grayPortalSheet`;
+	} else if (color === `green`) {
+		sheet = `greenPortalSheet`;
+	} else if (color === `orange`) {
+		sheet = `orangePortalSheet`;
+	} else if (color === `pink`) {
+		sheet = `pinkPortalSheet`;
+	} else if (color === `red`) {
+		sheet = `redPortalSheet`;
 	}
 
 	const portal = This.physics.add.sprite(x, y, sheet).setScale(0.2, 0.2);
@@ -54,30 +79,33 @@ const createPortal = (This, color, x, y, rotation) => {
 	return portal;
 };
 
-const joinPortals = (This, enteringPortal, exitingPortal, objectsAllowedToOverlap) => {
-	addTeleportingOverlap(This, enteringPortal, exitingPortal, objectsAllowedToOverlap);
-	addTeleportingOverlap(This, exitingPortal, enteringPortal, objectsAllowedToOverlap);
+const joinPortals = (This, enteringPortal, exitingPortal, objectsAllowedToTeleport) => {
+	This.objectsAllowedToTeleport = objectsAllowedToTeleport;
+	addTeleportingOverlap(This, enteringPortal, exitingPortal, objectsAllowedToTeleport);
+	addTeleportingOverlap(This, exitingPortal, enteringPortal, objectsAllowedToTeleport);
 };
 
-const addTeleportingOverlap = (This, portal1, portal2, objectsAllowedToOverlap) => {
-	This.physics.add.overlap(portal1, objectsAllowedToOverlap, (obj1, item) => {
-		if (!This.inPortal) {
-			This.inPortal = true;
+const addTeleportingOverlap = (This, portal1, portal2, objectsAllowedToTeleport) => {
+	This.physics.add.overlap(portal1, objectsAllowedToTeleport, (obj1, item) => {
+		if (!item.inPortal) {
+			item.inPortal = true;
 			item.setPosition(portal2.x, portal2.y);
 
 			applyPortalTrajectory(portal1, portal2, item);
 		}
-		This.currentInPortalNumber++;
+		item.currentInPortalNumber++;
 	});
 };
 
 const portalUpdate = (This) => {
-	if (This.inPortal && This.currentInPortalNumber !== This.pastInPortalNumber) {
-		This.pastInPortalNumber = This.currentInPortalNumber;
-	} else {
-		This.inPortal = false;
-		This.currentInPortalNumber = 0;
-		This.pastInPortalNumber = 0;
+	for (let obj of This.objectsAllowedToTeleport) {
+		if (obj.inPortal && obj.currentInPortalNumber !== obj.pastInPortalNumber) {
+			obj.pastInPortalNumber = obj.currentInPortalNumber;
+		} else {
+			obj.inPortal = false;
+			obj.currentInPortalNumber = 0;
+			obj.pastInPortalNumber = 0;
+		}
 	}
 };
 

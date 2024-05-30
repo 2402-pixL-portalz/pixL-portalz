@@ -7,6 +7,7 @@ import dayImage from "./../assets/images/backgrounds/day.png";
 import nightImage from "./../assets/images/backgrounds/night.png";
 import { createPlatform, platformLoad, platformObject } from "../assets/objects/platforms/platform";
 import { createPortal, joinPortals, portalLoad, portalUpdate, portalVars } from "../assets/objects/portals/portal";
+import resettingFunctionality from "../util functions/resettingFunctionality";
 
 
 class LevelSelect extends Phaser.Scene {
@@ -53,7 +54,7 @@ class LevelSelect extends Phaser.Scene {
 		this.player = this.physics.add.sprite(200, 600, "character").setScale(3, 3);
 
 		this.player.setCollideWorldBounds(true);
-		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
+		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE,R`);
 		playerAnimCreate(this);
 
 		//exit
@@ -77,7 +78,7 @@ class LevelSelect extends Phaser.Scene {
 		this.portal1 = createPortal(this, `blue`, 30, this.sys.game.config.height - 60, `right`);
 		this.portal2 = createPortal(this, `blue`, 30, this.sys.game.config.height / 2 - 60, `right`);
 
-		joinPortals(this, this.portal1, this.portal2, this.player);
+		joinPortals(this, this.portal1, this.portal2, [this.player]);
 
 		//layering
 		layer.add([this.player]);
@@ -90,7 +91,7 @@ class LevelSelect extends Phaser.Scene {
 		playerControls(this);
 		playerAnimUpdate(this);
 		portalUpdate(this);
-
+    
 		if(this.game.saveState !== this.game.saveState2) {
 			// console.log(`updating the exit statis to: ${this.game.saveState}`);
 
@@ -107,6 +108,7 @@ class LevelSelect extends Phaser.Scene {
 		}
 
 		// console.log(`saveState, ${this.game.saveState}`);
+		resettingFunctionality(this);
 
 	}
 }
