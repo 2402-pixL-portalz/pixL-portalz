@@ -108,12 +108,10 @@ class LevelFour extends Phaser.Scene {
 		buttonUpdate(this);
 		portalUpdate(this);
 		resettingFunctionality(this);
+		garageUpdate(this.garage, this.isGarageOpen);
 		if (this.garageButton.isPressed) {
 			this.isGarageOpen = true;
 	}
-	garageUpdate(this.garage, this.isGarageOpen);
-
-	// Update exit
 	if (this.exitButton.isPressed) {
 			this.isExitUnlocked = true;
 	}
