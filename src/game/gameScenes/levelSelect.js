@@ -69,11 +69,11 @@ class LevelSelect extends Phaser.Scene {
 		this.exit4 = createExit(this, "Level Four", this.game.saveState[2], [(this.sys.game.config.width / 7) * 5, 715], [2, 2]);
 		this.exit5 = createExit(this, "Level Five", this.game.saveState[3], [(this.sys.game.config.width / 7) * 6, 715], [2, 2]);
 
-		this.exit6 = createExit(this, "Level One", this.game.saveState[4], [(this.sys.game.config.width / 7) * 2, 315], [2, 2]);
-		this.exit7 = createExit(this, "Level Two", this.game.saveState[5], [(this.sys.game.config.width / 7) * 3, 315], [2, 2]);
-		this.exit8 = createExit(this, "Level Three", this.game.saveState[6], [(this.sys.game.config.width / 7) * 4, 315], [2, 2]);
-		this.exit9 = createExit(this, "Level Four", this.game.saveState[7], [(this.sys.game.config.width / 7) * 5, 315], [2, 2]);
-		this.exit10 = createExit(this, "Level Five", this.game.saveState[8], [(this.sys.game.config.width / 7) * 6, 315], [2, 2]);
+		this.exit6 = createExit(this, "Level Six", this.game.saveState[4], [(this.sys.game.config.width / 7) * 2, 315], [2, 2]);
+		this.exit7 = createExit(this, "Level Seven", this.game.saveState[5], [(this.sys.game.config.width / 7) * 3, 315], [2, 2]);
+		this.exit8 = createExit(this, "Level Eight", this.game.saveState[6], [(this.sys.game.config.width / 7) * 4, 315], [2, 2]);
+		this.exit9 = createExit(this, "Level Nine", this.game.saveState[7], [(this.sys.game.config.width / 7) * 5, 315], [2, 2]);
+		this.exit10 = createExit(this, "Level Ten", this.game.saveState[8], [(this.sys.game.config.width / 7) * 6, 315], [2, 2]);
 
 		this.portal1 = createPortal(this, `blue`, 30, this.sys.game.config.height - 60, `right`);
 		this.portal2 = createPortal(this, `blue`, 30, this.sys.game.config.height / 2 - 60, `right`);
