@@ -8,6 +8,7 @@ import { portalVars, portalLoad, portalUpdate, createPortal} from "../assets/obj
 import { playerAnimUpdate, playerAnimCreate, playerAnimPreload } from "../util functions/playerAnims";
 import { createGarage, garageLoad, garageUpdate } from "../assets/objects/garage/garage";
 import { buttonVars, buttonLoad, buttonUpdate, createButton, addButtonOverlap} from "../assets/objects/buttons/button";
+import backgroundMusic from "../assets/audio/background/metal-bar.mp3"; //change the mp3 file
 
 class GabeScene extends Phaser.Scene {
   constructor() {
@@ -25,6 +26,7 @@ class GabeScene extends Phaser.Scene {
     portalLoad(this, `blue`);
     garageLoad(this);
     buttonLoad(this);
+    this.load.audio("backgroundMusic", backgroundMusic);
   }
 
 
@@ -77,6 +79,10 @@ class GabeScene extends Phaser.Scene {
     //interacts
     this.physics.add.collider(this.player, platforms);
     // this.physics.add.collider(this.player, this.garage1);
+
+    //audio
+    this.backgroundMusic = this.sound.add("backgroundMusic");
+    this.backgroundMusic.play();
 
     
   }

@@ -8,6 +8,7 @@ import nightImage from "./../assets/images/backgrounds/night.png";
 import { createPlatform, platformLoad, platformObject } from "../assets/objects/platforms/platform";
 import { createPortal, joinPortals, portalLoad, portalUpdate, portalVars } from "../assets/objects/portals/portal";
 
+
 class LevelSelect extends Phaser.Scene {
 	constructor() {
 		super("Level Select");
