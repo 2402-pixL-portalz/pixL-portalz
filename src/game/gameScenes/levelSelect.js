@@ -10,6 +10,7 @@ import { createPortal, joinPortals, portalLoad, portalUpdate, portalVars } from 
 import resettingFunctionality from "../util functions/resettingFunctionality";
 
 
+
 class LevelSelect extends Phaser.Scene {
 	constructor() {
 		super("Level Select");

@@ -11,6 +11,7 @@ import LevelSeven from "../game/gameScenes/levels/levelSeven.js";
 import LevelEight from "../game/gameScenes/levels/levelEight.js";
 import LevelNine from "../game/gameScenes/levels/levelNine.js";
 import LevelTen from "../game/gameScenes/levels/levelTen.js";
+import GabeScene from "../game/gameScenes/gabesTestScene.js";
 
 class Game {
 	constructor() {
@@ -24,7 +25,7 @@ class Game {
 				type: Phaser.AUTO,
 				width: 1600,
 				height: 800,
-				scene: [ LevelSelect, LevelOne, LevelTwo, LevelThree, LevelFour,LevelFive, LevelSix, LevelSeven, LevelEight, LevelNine, LevelTen],
+				scene: [LevelSelect, LevelOne, LevelTwo, LevelThree, LevelFour,LevelFive, LevelSix, LevelSeven, LevelEight, LevelNine, LevelTen],
 				fps: {
 					target: 60,
 					forceSetTimeOut: true
