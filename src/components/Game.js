@@ -11,6 +11,7 @@ import LevelSeven from "../game/gameScenes/levels/levelSeven.js";
 import LevelEight from "../game/gameScenes/levels/levelEight.js";
 import LevelNine from "../game/gameScenes/levels/levelNine.js";
 import LevelTen from "../game/gameScenes/levels/levelTen.js";
+import GabeScene from "../game/gameScenes/gabesTestScene.js";
 
 class Game {
 	constructor() {
