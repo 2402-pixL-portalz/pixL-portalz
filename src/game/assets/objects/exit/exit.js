@@ -16,8 +16,7 @@ const createExit = (level, scene, isUnlocked, [xPosition, yPosition], [lengthSca
 	exit.pastIsUnlocked = exit.isUnlocked;
 	level.physics.add.overlap(exit, level.player, () => {
 		if ((level.controls.S.isDown || level.controls.DOWN.isDown) && exit.isUnlocked) {
-			
-			console.log('thing thang');
+		
 			if (levelNum != null) {
 				handlePost(levelNum, level);
 				handleState(levelNum, level);
@@ -39,7 +38,7 @@ const handleState = (levelNum, level) => {
 const handlePost = async (levelNum, level) => {
 
 	if (localStorage.getItem('token') != null) {
-		console.log(localStorage.getItem('token'));
+		// console.log(localStorage.getItem('token'));
 		const result = await fetch("/api/v1/levels/complete", {
 			method: 'POST',
 			headers: {
