@@ -42,7 +42,7 @@ class LevelFour extends Phaser.Scene {
 		bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
 		//player
-		this.player = this.physics.add.sprite(80, 700, "character").setScale(3, 3);
+		this.player = this.physics.add.sprite(120, 700, "character").setScale(3, 3);
 
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE,R`);
@@ -62,11 +62,11 @@ class LevelFour extends Phaser.Scene {
 		createPlatform(platforms, [100, 500], [7, 0.6]);
 
 		//portals
-		this.portal1 = createPortal(this, `green`, 100, 610, `down`);
-		this.portal2 = createPortal(this, `green`, 525, 80, `right`);
+		this.portal1 = createPortal(this, `green`, 100, 550, `down`);
+		this.portal2 = createPortal(this, `green`, 525, 80, `left`);
 		joinPortals(this, this.portal1, this.portal2, [this.player]);
 
-		this.portal3 = createPortal(this, `blue`, 715, 150, `left`);
+		this.portal3 = createPortal(this, `blue`, 715, 150, `right`);
 		this.portal4 = createPortal(this, `blue`, 25, 425, `right`);
 		joinPortals(this, this.portal3, this.portal4, [this.player]);
 
@@ -75,10 +75,10 @@ class LevelFour extends Phaser.Scene {
 		joinPortals(this, this.portal5, this.portal6, [this.player]);
 
 		//buttons
-		this.garageButton = createButton(this, 250, 498, 1, 1);
+		this.garageButton = createButton(this, 200, 490, 1, 1);
     addButtonOverlap(this, this.garageButton, [this.player]);
 
-    this.exitButton = createButton(this, 200, 198, 1, 1);
+    this.exitButton = createButton(this, 200, 190, 1, 1);
     addButtonOverlap(this, this.exitButton, [this.player]);
 
 		
@@ -87,9 +87,9 @@ class LevelFour extends Phaser.Scene {
 		this.garage = createGarage(this, [468, 1], [.3, 5], 'UP', 0.1);
 
 		//exit
-		this.exit1 = createExit(this, "Level Select", false, [250, 750], [1, 1]);
+		this.exit1 = createExit(this, "Level Select", false, [400, 715], [2, 2], 4);
 
-		this.entrance = createExit(this, `Level Select`, true, [50, 750], [.5, 1]);
+		this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
 
 		//interact
 		this.physics.add.collider(this.player, platforms);
