@@ -17,6 +17,17 @@ const syncAndSeed = async () => {
 			}
 		});
 
+		for (let i = 0; i < process.env.NUM_OF_SEED_LEVELS; i++) {
+			await prisma.levels.create({
+				data: {
+					levelNum: i + 1,
+					isCompleted: true,
+					achievements: 3,
+					userId: 1
+				}
+			});
+		}
+
 		console.log(`\nTEST USER SEEDED!`);
 
 		for (let i = 1; i <= process.env.NUM_OF_SEED_USERS - 1; i++) {
@@ -32,13 +43,13 @@ const syncAndSeed = async () => {
 		console.log(`\nUSERS SEEDED!`);
 		console.log(`\n\nSTARTING TO SEED LEVELS...\n`);
 
-		for (let i = 1; i <= process.env.NUM_OF_SEED_USERS; i++) {
+		for (let i = 2; i <= process.env.NUM_OF_SEED_USERS; i++) {
 			const howManyLevelsAreCompleted = Math.floor(Math.random() * process.env.NUM_OF_SEED_LEVELS + 1);
 
 			for (let j = 0; j < process.env.NUM_OF_SEED_LEVELS; j++) {
 				await prisma.levels.create({
 					data: {
-						levelNum: j+1,
+						levelNum: j + 1,
 						isCompleted: Math.round(Math.random()) <= 0.5,
 						achievements: howManyLevelsAreCompleted,
 						userId: i
