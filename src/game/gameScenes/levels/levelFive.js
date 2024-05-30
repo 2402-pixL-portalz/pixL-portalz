@@ -27,6 +27,8 @@ class LevelFive extends Phaser.Scene {
 		portalLoad(this, "blue");
     portalLoad(this, "green");
     portalLoad(this, "orange");
+		portalLoad(this, "pink");
+		portalLoad(this, "red");
 		buttonLoad(this);
 	}
 
@@ -40,7 +42,7 @@ class LevelFive extends Phaser.Scene {
 		bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
 		//player
-		this.player = this.physics.add.sprite(80, 700, "character").setScale(3, 3);
+		this.player = this.physics.add.sprite(200, 700, "character").setScale(3, 3);
 
 		this.player.setCollideWorldBounds(true);
 		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE,R`);
@@ -49,27 +51,39 @@ class LevelFive extends Phaser.Scene {
 
 		//platforms
 		createPlatform(platforms, [800, 800], [20, 0.9]);
+		createPlatform(platforms, [1095, 400], [2, 0.6]);
+		createPlatform(platforms, [1000, 385], [.1, 0.6]);
 
 		//portals
     this.portal1 = createPortal(this, `green`, 1570, 740, `left`);
-    this.portal2 = createPortal(this, `green`, 30, 80, `right`);
+    this.portal2 = createPortal(this, `red`, 30, 80, `right`);
     joinPortals(this, this.portal1, this.portal2, [this.player]);
 
-    this.portal3 = createPortal(this, `blue`, 800, 200, `right`);
+    this.portal3 = createPortal(this, `pink`, 800, 200, `right`);
     this.portal4 = createPortal(this, `blue`, 500, 25, `down`);
     joinPortals(this, this.portal3, this.portal4, [this.player]);
 
-    this.portal5 = createPortal(this, `orange`, 1000, 100, `left`);
+    this.portal5 = createPortal(this, `green`, 1000, 100, `left`);
     this.portal6 = createPortal(this, `orange`, 250, 400, `up`);
     joinPortals(this, this.portal5, this.portal6, [this.player]);
 
+		this.portal7 = createPortal(this, `red`, 1575, 300, `left`);
+    this.portal8 = createPortal(this, `pink`, 700, 400, `up`);
+    joinPortals(this, this.portal7, this.portal8, [this.player]);
+
+		this.portal7 = createPortal(this, `blue`, 1500, 25, `down`);
+    this.portal8 = createPortal(this, `red`, 1300, 500, `up`);
+    joinPortals(this, this.portal7, this.portal8, [this.player]);
+
 		//button
-		this.exitButton = createButton(this, 1000, 198, 1, 1);
+		this.exitButton = createButton(this, 1165, 390, 1, 1);
     addButtonOverlap(this, this.exitButton, [this.player]);
-		
+
+		//enterence
+		this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
 
 		//exit
-		this.exit1 = createExit(this, "Level Select", false, [250, 750], [1, 1]);
+		this.exit1 = createExit(this, "Level Select", false, [1000, 715], [2, 2], 5);
 
 		//interact
 		this.physics.add.collider(this.player, platforms);
