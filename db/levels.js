@@ -14,10 +14,10 @@ const getAllLevels = async (userId) => {
 };
 
 // Function to update level completion status
-const updateLevelCompletion = async (levelId, isCompleted) => {
+const updateLevelCompletion = async (level, isCompleted) => {
   try {
     await prisma.levels.update({
-      where: { id: levelId },
+      where: { levelNum: level },
       data: { isCompleted },
     });
     return { message: 'Level completion status updated' };
@@ -26,4 +26,15 @@ const updateLevelCompletion = async (levelId, isCompleted) => {
   }
 };
 
-module.exports = { getAllLevels, updateLevelCompletion };
+const getLevelByLevelId = async (levelNum, userId) => {
+
+  const level = await prisma.levels.findFirst({
+    where: {
+      userId,
+      levelNum,
+    },
+  });
+  return level.isCompleted;
+}
+
+module.exports = { getAllLevels, updateLevelCompletion, getLevelByLevelId };

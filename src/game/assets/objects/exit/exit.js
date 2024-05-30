@@ -8,7 +8,7 @@ const exitLoad = (level) => {
 };
 
 //creates an exit which takes in the scene an array with the x/y positions, and an array with the length/height of the exit
-const createExit = (level, scene, isUnlocked, [xPosition, yPosition], [lengthScale, heightScale]) => {
+const createExit = (level, scene, isUnlocked, [xPosition, yPosition], [lengthScale, heightScale], levelNum) => {
 	const exit = level.physics.add.sprite(xPosition, yPosition, `exit`).setScale(lengthScale, heightScale);
 	exit.body.allowGravity = false;
 	setIsUnlocked(exit, isUnlocked);
@@ -16,12 +16,44 @@ const createExit = (level, scene, isUnlocked, [xPosition, yPosition], [lengthSca
 	exit.pastIsUnlocked = exit.isUnlocked;
 	level.physics.add.overlap(exit, level.player, () => {
 		if ((level.controls.S.isDown || level.controls.DOWN.isDown) && exit.isUnlocked) {
+		
+			if (levelNum != null) {
+				handlePost(levelNum, level);
+				handleState(levelNum, level);
+			}
 			level.scene.start(scene);
 		}
 	});
-
 	return exit;
 };
+
+const handleState = (levelNum, level) => {
+
+	// console.log(level.game.saveState);
+	level.game.saveState[levelNum - 1] = true;
+	// console.log(`set level ${levelNum} = to ${level.game.saveState[levelNum - 1]}`);
+	// console.log(`save state is now: ${level.game.saveState}`);
+}
+
+const handlePost = async (levelNum, level) => {
+
+	if (localStorage.getItem('token') != null) {
+		// console.log(localStorage.getItem('token'));
+		const result = await fetch("/api/v1/levels/complete", {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `bearer ${localStorage.getItem('token')}`
+			},
+			body: JSON.stringify({ levelNum }),
+		});
+		// console.log("result");
+		// console.log(result);
+	}
+
+	
+
+}
 
 const exitUpdate = (exit, switchValue) => {
 	if (exit.isUnlocked !== switchValue) {

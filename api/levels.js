@@ -3,13 +3,17 @@ const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const { verifyToken } = require('../auth/authMiddleware');
+const { getLevelByLevelId } = require("../db/levels");
 
 // Get all levels
 router.get('/all', verifyToken, async (req, res) => {
   try {
     const userId = req.user.userId;
     const levels = await prisma.levels.findMany({
-      where: { userId: userId }
+      where: { userId: userId },
+      orderBy: {
+        levelNum: 'asc'
+      }
     });
     res.status(200).json(levels); // Return levels as JSON with status 200
   } catch (error) {
@@ -42,16 +46,32 @@ router.get('/next', verifyToken, async (req, res) => {
   }
 });
 
+
+router.get('/:levelNum', verifyToken, async (req,res,next) => {
+  const userId = req.user.userId;
+  const levelNum = req.params.levelNum;
+
+  try {
+    const level = await getLevelByLevelId(levelNum, userId);
+    console.log(level);
+    res.send(level);
+
+  } catch (error) {
+    next();
+  }
+
+})
+
 // Complete level
 router.post('/complete', verifyToken, async (req, res) => {
-  const { levelId } = req.body;
+  const level = req.body.levelNum;
   const userId = req.user.userId;
 
   try {
     const updateLevel = await prisma.levels.updateMany({
       where: {
-        id: levelId,
         userId: userId,
+        levelNum: level,
         isCompleted: false
       },
       data: {

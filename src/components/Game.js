@@ -17,9 +17,10 @@ class Game {
 		this.game = null;
 	}
 
-	createGame() {
+	createGame(progress) {
 		if (this.game === null) {
 			const config = {
+				saveState: progress,
 				type: Phaser.AUTO,
 				width: 1600,
 				height: 800,
@@ -46,6 +47,10 @@ class Game {
 			this.game.destroy(true);
 			this.game = null;
 		}
+	}
+
+	transferState(state) {
+		this.game.saveState = state;
 	}
 }
 

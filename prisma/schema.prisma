@@ -22,6 +22,7 @@ model users {
 
 model levels {
   id          Int     @id @default(autoincrement())
+  levelNum    Int
   isCompleted Boolean
   achievements Int
   user        users   @relation(fields: [userId], references: [id], onDelete: Cascade)
