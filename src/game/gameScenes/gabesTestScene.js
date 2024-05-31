@@ -9,8 +9,11 @@ import { playerAnimUpdate, playerAnimCreate, playerAnimPreload } from "../util f
 import { createGarage, garageLoad, garageUpdate } from "../assets/objects/garage/garage";
 import { buttonLoad, buttonUpdate, createButton, addButtonOverlap } from "../assets/objects/buttons/button";
 import backgroundMusic from "../assets/audio/background/metal-bar.mp3"; //change the mp3 file
+import { boxLoad, boxUpdate, createBox } from "../assets/objects/box/box";
+import { rayLoad, rayCreate, rayUpdate } from "../util functions/ray";
 
 class GabeScene extends Phaser.Scene {
+  
 	constructor() {
 		super(`GabeScene`);
 		playerVars(this);
@@ -83,6 +86,6 @@ class GabeScene extends Phaser.Scene {
 		garageUpdate(this.garage2, this.myButton.isPressed);
 		garageUpdate(this.garage3, this.myButton.isPressed);
 	}
-}
+
 
 export default GabeScene;

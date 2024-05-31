@@ -105,13 +105,13 @@ const playerAnimUpdate = (level) => {
 
 
   //if the character is NOT on the floor and "inAir" is set to FALSE, play the "jump" animation and set "inAir" to TRUE
-  if (!level.player.body.onFloor() && level.inAir === false && (level.controls.W.isDown || level.controls.UP.isDown || level.controls.SPACE.isDown)) {
+  if (!(level.player.body.onFloor() || level.player.fakeOnFloor) && level.inAir === false && (level.controls.W.isDown || level.controls.UP.isDown || level.controls.SPACE.isDown)) {
     // console.log("in air true");
     level.player.play("jump");
     level.inAir = true;
   }
 
-  else if(!level.player.body.onFloor() && level.inAir === false){
+  else if(!(level.player.body.onFloor() || level.player.fakeOnFloor) && level.inAir === false){
     // console.log("works yay");
 
     level.player.play("fall");
@@ -119,7 +119,7 @@ const playerAnimUpdate = (level) => {
   }
 
   //if the character is on the floor, and "inAir" is set to TRUE, set "inAir" to FALSE and check to see if the character moving LEFT or RIGHT, if they are, play the "keepRunning" animation, if not, play the "idle" animation
-  else if (level.player.body.onFloor() && level.inAir === true) {
+  else if ((level.player.body.onFloor() || level.player.fakeOnFloor) && level.inAir === true) {
     level.inAir = false;
     if (level.movingL || level.movingR) {
       level.player.play("keepRunning");
