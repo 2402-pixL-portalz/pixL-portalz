@@ -6,16 +6,15 @@ import { createPlatform, platformObject, platformLoad } from "../../assets/objec
 import levelOneBg from "../../assets/images/backgrounds/level.jpg";
 import { exitLoad, createExit, exitUpdate, setIsUnlocked } from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
-import { buttonVars, buttonLoad, createButton, addButtonOverlap, buttonUpdate } from "../../assets/objects/buttons/button";
-import { portalLoad, createPortal, joinPortals, portalVars, portalUpdate} from "../../assets/objects/portals/portal";
+import { buttonLoad, createButton, addButtonOverlap, buttonUpdate } from "../../assets/objects/buttons/button";
+import { portalLoad, createPortal, joinPortals, portalVars, portalUpdate } from "../../assets/objects/portals/portal";
 import resettingFunctionality from "../../util functions/resettingFunctionality";
 
 class LevelFive extends Phaser.Scene {
 	constructor() {
 		super(`Level Five`);
 		playerVars(this);
-		buttonVars(this);
-    portalVars(this);
+		portalVars(this);
 	}
 
 	preload() {
@@ -25,8 +24,8 @@ class LevelFive extends Phaser.Scene {
 		exitLoad(this);
 		platformLoad(this);
 		portalLoad(this, "blue");
-    portalLoad(this, "green");
-    portalLoad(this, "orange");
+		portalLoad(this, "green");
+		portalLoad(this, "orange");
 		buttonLoad(this);
 	}
 
@@ -51,22 +50,21 @@ class LevelFive extends Phaser.Scene {
 		createPlatform(platforms, [800, 800], [20, 0.9]);
 
 		//portals
-    this.portal1 = createPortal(this, `green`, 1570, 740, `left`);
-    this.portal2 = createPortal(this, `green`, 30, 80, `right`);
-    joinPortals(this, this.portal1, this.portal2, [this.player]);
+		this.portal1 = createPortal(this, `green`, 1570, 740, `left`);
+		this.portal2 = createPortal(this, `green`, 30, 80, `right`);
+		joinPortals(this, this.portal1, this.portal2, [this.player]);
 
-    this.portal3 = createPortal(this, `blue`, 800, 200, `right`);
-    this.portal4 = createPortal(this, `blue`, 500, 25, `down`);
-    joinPortals(this, this.portal3, this.portal4, [this.player]);
+		this.portal3 = createPortal(this, `blue`, 800, 200, `right`);
+		this.portal4 = createPortal(this, `blue`, 500, 25, `down`);
+		joinPortals(this, this.portal3, this.portal4, [this.player]);
 
-    this.portal5 = createPortal(this, `orange`, 1000, 100, `left`);
-    this.portal6 = createPortal(this, `orange`, 250, 400, `up`);
-    joinPortals(this, this.portal5, this.portal6, [this.player]);
+		this.portal5 = createPortal(this, `orange`, 1000, 100, `left`);
+		this.portal6 = createPortal(this, `orange`, 250, 400, `up`);
+		joinPortals(this, this.portal5, this.portal6, [this.player]);
 
 		//button
 		this.exitButton = createButton(this, 1000, 198, 1, 1);
-    addButtonOverlap(this, this.exitButton, [this.player]);
-		
+		addButtonOverlap(this, this.exitButton, [this.player]);
 
 		//exit
 		this.exit1 = createExit(this, "Level Select", false, [250, 750], [1, 1]);
@@ -84,13 +82,12 @@ class LevelFive extends Phaser.Scene {
 		playerControls(this);
 		playerAnimUpdate(this);
 		buttonUpdate(this);
-    portalUpdate(this);
-    resettingFunctionality(this);
+		portalUpdate(this);
+		resettingFunctionality(this);
 		exitUpdate(this.exit1, this.isExitUnlocked);
 		if (this.exitButton.isPressed) {
-      this.isExitUnlocked = true;
-  }
-  
+			this.isExitUnlocked = true;
+		}
 	}
 }
 
