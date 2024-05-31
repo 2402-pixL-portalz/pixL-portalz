@@ -1,4 +1,4 @@
-import LevelSelect from "../../../gameScenes/levelSelect";
+
 import exitImg from "../../images/exit/exit.png";
 import exitClosedImg from "../../images/exit/exitClosed.png";
 
