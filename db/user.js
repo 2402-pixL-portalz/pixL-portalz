@@ -16,21 +16,21 @@ const registerUser = async (username, password) => {
       data: {
         username,
         password: hashedPassword,
-        levels: {
-          create: [
-            { levelNum: 1, isCompleted: false, achievements: 0 },
-            { levelNum: 2, isCompleted: false, achievements: 0 },
-            { levelNum: 3, isCompleted: false, achievements: 0 },
-            { levelNum: 4, isCompleted: false, achievements: 0 },
-            { levelNum: 5, isCompleted: false, achievements: 0 },
-            { levelNum: 6, isCompleted: false, achievements: 0 },
-            { levelNum: 7, isCompleted: false, achievements: 0 },
-            { levelNum: 8, isCompleted: false, achievements: 0 },
-            { levelNum: 9, isCompleted: false, achievements: 0 },
-            { levelNum: 10, isCompleted: false, achievements: 0 },
+        // levels: {
+        //   create: [
+        //     { levelNum: 1, isCompleted: false, achievements: 0 },
+        //     { levelNum: 2, isCompleted: false, achievements: 0 },
+        //     { levelNum: 3, isCompleted: false, achievements: 0 },
+        //     { levelNum: 4, isCompleted: false, achievements: 0 },
+        //     { levelNum: 5, isCompleted: false, achievements: 0 },
+        //     { levelNum: 6, isCompleted: false, achievements: 0 },
+        //     { levelNum: 7, isCompleted: false, achievements: 0 },
+        //     { levelNum: 8, isCompleted: false, achievements: 0 },
+        //     { levelNum: 9, isCompleted: false, achievements: 0 },
+        //     { levelNum: 10, isCompleted: false, achievements: 0 },
           
-          ],
-        },
+        //   ],
+        // },
       },
     });
     const token = jwt.sign(
