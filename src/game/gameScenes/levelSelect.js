@@ -9,8 +9,6 @@ import { createPlatform, platformLoad, platformObject } from "../assets/objects/
 import { createPortal, joinPortals, portalLoad, portalUpdate, portalVars } from "../assets/objects/portals/portal";
 import resettingFunctionality from "../util functions/resettingFunctionality";
 
-
-
 class LevelSelect extends Phaser.Scene {
 	constructor() {
 		super("Level Select");
@@ -28,11 +26,10 @@ class LevelSelect extends Phaser.Scene {
 	}
 
 	create() {
-
-		if(this.game.saveState === null){
+		if (this.game.saveState === null) {
 			this.game.saveState = [false, false, false, false, false, false, false, false, false, false];
 			this.game.saveState2 = [];
-			for(let ele in this.game.saveState) {
+			for (let ele in this.game.saveState) {
 				this.game.saveState2.push(ele);
 			}
 		}
@@ -64,7 +61,7 @@ class LevelSelect extends Phaser.Scene {
 		// console.log(this.game.saveState);
 
 		this.exit1 = createExit(this, "Level One", true, [(this.sys.game.config.width / 7) * 2, 715], [2, 2]);
-		// console.log("creating exit two");
+
 		this.exit2 = createExit(this, "Level Two", this.game.saveState[0], [(this.sys.game.config.width / 7) * 3, 715], [2, 2]);
 		this.exit3 = createExit(this, "Level Three", this.game.saveState[1], [(this.sys.game.config.width / 7) * 4, 715], [2, 2]);
 		this.exit4 = createExit(this, "Level Four", this.game.saveState[2], [(this.sys.game.config.width / 7) * 5, 715], [2, 2]);
@@ -92,8 +89,8 @@ class LevelSelect extends Phaser.Scene {
 		playerControls(this);
 		playerAnimUpdate(this);
 		portalUpdate(this);
-    
-		if(this.game.saveState !== this.game.saveState2) {
+
+		if (this.game.saveState !== this.game.saveState2) {
 			// console.log(`updating the exit statis to: ${this.game.saveState}`);
 
 			this.game.saveState2 = this.game.saveState;
@@ -110,7 +107,6 @@ class LevelSelect extends Phaser.Scene {
 
 		// console.log(`saveState, ${this.game.saveState}`);
 		resettingFunctionality(this);
-
 	}
 }
 

@@ -7,7 +7,7 @@ import levelOneBg from "../../assets/images/backgrounds/level.jpg";
 import { exitLoad, createExit } from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
 import { boxLoad, createBox, boxUpdate } from "../../assets/objects/box/box";
-import { buttonLoad, createButton, buttonUpdate, buttonVars, addButtonOverlap } from "../../assets/objects/buttons/button";
+import { buttonLoad, createButton, buttonUpdate, addButtonOverlap } from "../../assets/objects/buttons/button";
 import { garageLoad, createGarage, garageUpdate } from "../../assets/objects/garage/garage";
 import resettingFunctionality from "../../util functions/resettingFunctionality";
 
@@ -15,7 +15,6 @@ class LevelTwo extends Phaser.Scene {
 	constructor() {
 		super(`Level Two`);
 		playerVars(this);
-		buttonVars(this);
 	}
 
 	preload() {

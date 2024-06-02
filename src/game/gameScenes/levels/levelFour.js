@@ -6,16 +6,15 @@ import { createPlatform, platformObject, platformLoad } from "../../assets/objec
 import levelOneBg from "../../assets/images/backgrounds/level.jpg";
 import { exitLoad, createExit, exitUpdate, setIsUnlocked } from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
-import { buttonVars, buttonLoad, createButton, addButtonOverlap, buttonUpdate } from "../../assets/objects/buttons/button";
+import { buttonLoad, createButton, addButtonOverlap, buttonUpdate } from "../../assets/objects/buttons/button";
 import { garageLoad, createGarage, garageUpdate } from "../../assets/objects/garage/garage";
-import { portalLoad, createPortal, joinPortals, portalVars, portalUpdate} from "../../assets/objects/portals/portal";
+import { portalLoad, createPortal, joinPortals, portalVars, portalUpdate } from "../../assets/objects/portals/portal";
 import resettingFunctionality from "../../util functions/resettingFunctionality";
 
 class LevelFour extends Phaser.Scene {
 	constructor() {
 		super(`Level Four`);
 		playerVars(this);
-		buttonVars(this);
 		portalVars(this);
 	}
 
@@ -76,15 +75,13 @@ class LevelFour extends Phaser.Scene {
 
 		//buttons
 		this.garageButton = createButton(this, 200, 490, 1, 1);
-    addButtonOverlap(this, this.garageButton, [this.player]);
+		addButtonOverlap(this, this.garageButton, [this.player]);
 
-    this.exitButton = createButton(this, 200, 190, 1, 1);
-    addButtonOverlap(this, this.exitButton, [this.player]);
-
-		
+		this.exitButton = createButton(this, 200, 190, 1, 1);
+		addButtonOverlap(this, this.exitButton, [this.player]);
 
 		//garage
-		this.garage = createGarage(this, [468, 1], [.3, 5], 'UP', 0.1);
+		this.garage = createGarage(this, [468, 1], [0.3, 5], "UP", 0.1);
 
 		//exit
 		this.exit1 = createExit(this, "Level Select", false, [400, 715], [2, 2], 4);
@@ -98,8 +95,6 @@ class LevelFour extends Phaser.Scene {
 		const layer = this.add.layer();
 		layer.add([this.player]);
 		layer.setDepth(1);
-
-		
 	}
 
 	update() {
@@ -111,11 +106,11 @@ class LevelFour extends Phaser.Scene {
 		garageUpdate(this.garage, this.isGarageOpen);
 		if (this.garageButton.isPressed) {
 			this.isGarageOpen = true;
-	}
-	if (this.exitButton.isPressed) {
+		}
+		if (this.exitButton.isPressed) {
 			this.isExitUnlocked = true;
-	}
-	exitUpdate(this.exit1, this.isExitUnlocked);
+		}
+		exitUpdate(this.exit1, this.isExitUnlocked);
 	}
 }
 
