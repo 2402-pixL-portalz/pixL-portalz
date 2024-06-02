@@ -10,6 +10,7 @@ import { boxLoad, createBox, boxUpdate } from "../../assets/objects/box/box";
 import { buttonLoad, createButton, buttonUpdate, addButtonOverlap } from "../../assets/objects/buttons/button";
 import { garageLoad, createGarage, garageUpdate } from "../../assets/objects/garage/garage";
 import resettingFunctionality from "../../util functions/resettingFunctionality";
+import { rayCreate, rayLoad, rayUpdate } from "../../util functions/ray";
 
 class LevelTwo extends Phaser.Scene {
 	constructor() {
@@ -26,6 +27,7 @@ class LevelTwo extends Phaser.Scene {
 		boxLoad(this);
 		buttonLoad(this);
 		garageLoad(this);
+		rayLoad(this);
 	}
 
 	create() {
@@ -53,12 +55,12 @@ class LevelTwo extends Phaser.Scene {
 		addButtonOverlap(this, this.button, [this.player, this.box]);
 
 		//exit
-		this.exit1 = createExit(this, "Level Select", true, [1400, 750], [1, 1]);
+		this.exit1 = createExit(this, "Level Select", true, [1400, 713], [2, 2], 2);
 
 		this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
 
 		//garage
-		this.garage = createGarage(this, [1400, 691], [2, 1], "UP", 0.01);
+		this.garage = createGarage(this, [1400, 795], [2, 1.8], "DOWN", 0.01);
 
 		//floor
 		createPlatform(platforms, [800, 800], [20, 0.9]);
@@ -67,6 +69,8 @@ class LevelTwo extends Phaser.Scene {
 		this.physics.add.collider(this.player, platforms);
 		this.physics.add.collider(this.box, platforms);
 		this.physics.add.collider(this.player, this.box);
+
+		this.ray = rayCreate(this, this.box);
 
 		//layers
 		const layer = this.add.layer();
@@ -78,8 +82,9 @@ class LevelTwo extends Phaser.Scene {
 		playerControls(this);
 		playerAnimUpdate(this);
 		boxUpdate(this.box);
-		buttonUpdate(this);
+		buttonUpdate(this.button);
 		garageUpdate(this.garage, this.button.isPressed);
+		rayUpdate(this.ray, this);
 		resettingFunctionality(this);
 	}
 }

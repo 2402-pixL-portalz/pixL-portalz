@@ -8,7 +8,7 @@ import {
   platformLoad,
 } from "../../assets/objects/platforms/platform";
 import levelOneBg from "../../assets/images/backgrounds/level.jpg";
-import { exitLoad, createExit, exitUpdate, setIsUnlocked } from "../../assets/objects/exit/exit";
+import { exitLoad, createExit, exitUpdate } from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
 import { buttonLoad, createButton, addButtonOverlap, buttonUpdate } from "../../assets/objects/buttons/button";
 import { portalLoad, createPortal, joinPortals, portalVars, portalUpdate } from "../../assets/objects/portals/portal";
@@ -25,7 +25,7 @@ class LevelFive extends Phaser.Scene {
   preload() {
     playerAnimPreload(this);
     this.load.image("bg", levelOneBg);
-
+    this.isExitUnlocked = false;
 
     exitLoad(this);
     platformLoad(this);
@@ -86,10 +86,10 @@ class LevelFive extends Phaser.Scene {
 
     this.portal9 = createPortal(this, `blue`, 1500, 25, `down`);
     this.portal10 = createPortal(this, `red`, 1300, 500, `up`);
-    joinPortals(this, this.portal7, this.portal8, [this.player]);
+    joinPortals(this, this.portal9, this.portal10, [this.player]);
 
     //button
-    this.exitButton = createButton(this, 1165, 390, 1, 1);
+    this.exitButton = createButton(this, 1150, 390, 1, 1);
     addButtonOverlap(this, this.exitButton, [this.player]);
 
     //enterence

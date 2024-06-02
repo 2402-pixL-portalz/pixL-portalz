@@ -8,8 +8,9 @@ import jumpInst from "../../assets/images/instructions/toJump.png";
 import moveInst from "../../assets/images/instructions/toMove.png";
 import exitInst from "../../assets/images/instructions/exitSign.png";
 import resetInst from "../../assets/images/instructions/resetInstructions.png";
-import { exitLoad, exitUpdate, createExit, setIsUnlocked} from "../../assets/objects/exit/exit";
+import { exitLoad, createExit} from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
+import resettingFunctionality from "../../util functions/resettingFunctionality";
 
 
 class LevelOne extends Phaser.Scene {
@@ -46,10 +47,9 @@ class LevelOne extends Phaser.Scene {
 		
 
 		//player
-		this.player = this.physics.add.sprite(100, 750, "character").setScale(3, 3)
-		this.player.body.setMaxVelocityX(this.playerMaxRunSpeed);
+		this.player = this.physics.add.sprite(150, 750, "character").setScale(3, 3)
 		this.player.setCollideWorldBounds(true);
-		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
+		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE,R`);
 
 		playerAnimCreate(this);
 
@@ -74,8 +74,7 @@ class LevelOne extends Phaser.Scene {
 		createPlatform(platforms, [800, 800,], [20,0.9]);
 
 		//exit
-		// this.exit1 = createExit(this, "Level Select", true, [1480, 85], [1,1], 1);
-		this.exit1 = createExit(this, "Level Select", true, [180, 785], [1,1], 1);
+		this.exit1 = createExit(this, "Level Select", true, [1480, 85], [1,1], 1);
 
     this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
 
@@ -92,6 +91,7 @@ class LevelOne extends Phaser.Scene {
 	update() {
 		playerControls(this);
 		playerAnimUpdate(this);
+		resettingFunctionality(this);
 	}
 }
 

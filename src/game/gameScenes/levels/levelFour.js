@@ -4,7 +4,7 @@ import playerVars from "../../util functions/playerVars";
 import playerControls from "../../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../../assets/objects/platforms/platform";
 import levelOneBg from "../../assets/images/backgrounds/level.jpg";
-import { exitLoad, createExit, exitUpdate, setIsUnlocked } from "../../assets/objects/exit/exit";
+import { exitLoad, createExit, exitUpdate } from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
 import { buttonLoad, createButton, addButtonOverlap, buttonUpdate } from "../../assets/objects/buttons/button";
 import { garageLoad, createGarage, garageUpdate } from "../../assets/objects/garage/garage";
@@ -21,6 +21,8 @@ class LevelFour extends Phaser.Scene {
 	preload() {
 		playerAnimPreload(this);
 		this.load.image("bg", levelOneBg);
+		this.isGarageOpen = false;
+		this.isExitUnlocked = false;
 
 		exitLoad(this);
 		platformLoad(this);
@@ -56,12 +58,14 @@ class LevelFour extends Phaser.Scene {
 		createPlatform(platforms, [1300, 550], [2, 0.6]);
 		createPlatform(platforms, [1000, 450], [2, 0.6]);
 		createPlatform(platforms, [1300, 350], [2, 0.6]);
-		createPlatform(platforms, [1000, 250], [2, 0.6]);
+		createPlatform(platforms, [900, 250], [4, 0.6]);
 		createPlatform(platforms, [100, 200], [7, 0.6]);
 		createPlatform(platforms, [100, 500], [7, 0.6]);
+		createPlatform(platforms, [900, 350], [.15, 9.5]);
+
 
 		//portals
-		this.portal1 = createPortal(this, `green`, 100, 550, `down`);
+		this.portal1 = createPortal(this, `green`, 400, 550, `down`);
 		this.portal2 = createPortal(this, `green`, 525, 80, `left`);
 		joinPortals(this, this.portal1, this.portal2, [this.player]);
 
@@ -100,7 +104,8 @@ class LevelFour extends Phaser.Scene {
 	update() {
 		playerControls(this);
 		playerAnimUpdate(this);
-		buttonUpdate(this);
+		buttonUpdate(this.garageButton);
+		buttonUpdate(this.exitButton);
 		portalUpdate(this);
 		resettingFunctionality(this);
 		garageUpdate(this.garage, this.isGarageOpen);
