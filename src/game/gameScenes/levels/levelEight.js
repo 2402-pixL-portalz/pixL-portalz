@@ -73,7 +73,8 @@ class LevelEight extends Phaser.Scene {
 		createPlatform(platforms, [800, 800,], [20, 0.9]); //floor
 
 		//exit
-		this.exit1 = createExit(this, "Level Select", false, [1500, 200], [1, 1], 8);
+		this.exit1 = createExit(this, "Level Select", false, [1500, 161], [2, 2], 8);
+		this.exit2 = createExit(this, "Level Select", true, [300, 750], [1, 1]);
 
 		//buttons
 		this.button1 = createButton(this, 660, 785, 1, 1);
