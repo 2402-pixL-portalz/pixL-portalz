@@ -40,6 +40,7 @@ const registerUser = async (username, password) => {
     );
     return { user: { id: newUser.id, username: newUser.username }, token };
   } catch (error) {
+    console.log(error);
     throw new Error('User registration failed');
   }
 };

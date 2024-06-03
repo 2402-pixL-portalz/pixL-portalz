@@ -89,7 +89,7 @@ class GabeScene extends Phaser.Scene {
 
     //audio
     this.backgroundMusic = this.sound.add("backgroundMusic");
-    // this.backgroundMusic.play();
+    this.backgroundMusic.play();
 
     //box?
     this.box1 = createBox(this, 500,500,1,1,this.player.body);
@@ -97,13 +97,14 @@ class GabeScene extends Phaser.Scene {
     this.ray = rayCreate(this, this.box1);
 
     console.log(this.player.body);
+    this.backgroundMusic.play();
+
 
 
 
   }
 
   update() {
-    
     playerControls(this);
     playerAnimUpdate(this);
     boxUpdate(this.box1);
