@@ -19,7 +19,6 @@ import {
   playerAnimUpdate,
 } from "../../util functions/playerAnims";
 import {
-  buttonVars,
   buttonLoad,
   createButton,
   addButtonOverlap,
@@ -43,7 +42,6 @@ class LevelSeven extends Phaser.Scene {
   constructor() {
     super(`Level Seven`);
     playerVars(this);
-    buttonVars(this);
     portalVars(this);
   }
 
@@ -160,7 +158,9 @@ class LevelSeven extends Phaser.Scene {
   update() {
     playerControls(this);
     playerAnimUpdate(this);
-    buttonUpdate(this);
+    this.button.forEach((button) => {
+      buttonUpdate(button);
+    });
     portalUpdate(this);
     resettingFunctionality(this);
 
