@@ -145,6 +145,7 @@ class LevelSeven extends Phaser.Scene {
 
     //exit
     this.exit1 = createExit(this, "Level Select", true, [100, 265], [2, 2], 7);
+    this.exit2 = createExit(this, "Level Select", true, [150, 750], [1, 1]);
 
     //interact
     this.physics.add.collider(this.player, platforms);
