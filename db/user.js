@@ -26,9 +26,6 @@ const registerUser = async (username, password) => {
             { levelNum: 6, isCompleted: false, achievements: 0 },
             { levelNum: 7, isCompleted: false, achievements: 0 },
             { levelNum: 8, isCompleted: false, achievements: 0 },
-            { levelNum: 9, isCompleted: false, achievements: 0 },
-            { levelNum: 10, isCompleted: false, achievements: 0 },
-          
           ],
         },
       },

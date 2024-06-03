@@ -6,6 +6,7 @@ import runParticle from "../assets/images/particles/runningParticle.png";
 import fall from "../assets/spritesheets/dogwaterCharacter/badFall.png";
 import differentRunning from "../assets/spritesheets/dogwaterCharacter/differentRunning.png";
 import extraDifferentIdle from "../assets/spritesheets/dogwaterCharacter/extraDifferentIdle.png";
+import differentBadKeepRunning from "../assets/spritesheets/dogwaterCharacter/differentBadKeepRunning.png";
 
 
 
@@ -21,7 +22,7 @@ const playerAnimPreload = (level) => {
     frameHeight: 32
   })
 
-  level.load.spritesheet("continueRunning", keepRunning, {
+  level.load.spritesheet("continueRunning", differentBadKeepRunning, {
     frameWidth: 32,
     frameHeight: 32
   })
