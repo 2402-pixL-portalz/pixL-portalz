@@ -86,6 +86,7 @@ class GabeScene extends Phaser.Scene {
 		garageUpdate(this.garage2, this.myButton.isPressed);
 		garageUpdate(this.garage3, this.myButton.isPressed);
 	}
+
 }
 
 export default GabeScene;
