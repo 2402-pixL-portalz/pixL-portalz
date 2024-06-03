@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -17,17 +17,17 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       });
 
-      // Check if the response is JSON
       if (result.headers.get('content-type')?.includes('application/json')) {
         const userData = await result.json();
         if (userData.token) {
           localStorage.setItem('token', userData.token);
+          setIsLoggedIn(true);
           navigate('/');
         } else {
           console.log('Error logging in, no token received', userData);
         }
       } else {
-        console.log('Error: Response is not JSON'); // Receiving this response in console when attempting to login
+        console.log('Error: Response is not JSON');
       }
     } catch (error) {
       console.error('Error logging in', error);
@@ -53,8 +53,8 @@ const Login = () => {
           required
         /><br />
 
-        <br></br> {/*added for quick css button placement alternative*/}
-        <br></br> {/*added for quick css button placement alternative*/}
+        <br></br> {/* quick CSS fix */}
+        <br></br> {/* quick CSS fix */}
         <button className="button loginPageButton">Login</button>
       </form>
     </div>

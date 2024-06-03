@@ -1,3 +1,4 @@
+
 import exitImg from "../../images/exit/exit.png";
 import exitClosedImg from "../../images/exit/exitClosed.png";
 
@@ -16,11 +17,11 @@ const createExit = (level, scene, isUnlocked, [xPosition, yPosition], [lengthSca
 	exit.pastIsUnlocked = exit.isUnlocked;
 	level.physics.add.overlap(exit, level.player, () => {
 		if ((level.controls.S.isDown || level.controls.DOWN.isDown) && exit.isUnlocked) {
-		
 			if (levelNum != null) {
 				handlePost(levelNum, level);
 				handleState(levelNum, level);
 			}
+
 			level.scene.start(scene);
 		}
 	});
@@ -28,32 +29,22 @@ const createExit = (level, scene, isUnlocked, [xPosition, yPosition], [lengthSca
 };
 
 const handleState = (levelNum, level) => {
-
-	// console.log(level.game.saveState);
 	level.game.saveState[levelNum - 1] = true;
-	// console.log(`set level ${levelNum} = to ${level.game.saveState[levelNum - 1]}`);
-	// console.log(`save state is now: ${level.game.saveState}`);
-}
+};
 
 const handlePost = async (levelNum, level) => {
-
-	if (localStorage.getItem('token') != null) {
+	if (localStorage.getItem("token") != null) {
 		// console.log(localStorage.getItem('token'));
 		const result = await fetch("/api/v1/levels/complete", {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `bearer ${localStorage.getItem('token')}`
+				"Content-Type": "application/json",
+				Authorization: `bearer ${localStorage.getItem("token")}`
 			},
-			body: JSON.stringify({ levelNum }),
+			body: JSON.stringify({ levelNum })
 		});
-		// console.log("result");
-		// console.log(result);
 	}
-
-	
-
-}
+};
 
 const exitUpdate = (exit, switchValue) => {
 	if (exit.isUnlocked !== switchValue) {

@@ -4,24 +4,25 @@ import playerVars from "../../util functions/playerVars";
 import playerControls from "../../util functions/playerControls";
 import { createPlatform, platformObject, platformLoad } from "../../assets/objects/platforms/platform";
 import levelOneBg from "../../assets/images/backgrounds/level.jpg";
-import { exitLoad, createExit, exitUpdate, setIsUnlocked } from "../../assets/objects/exit/exit";
+import { exitLoad, createExit, exitUpdate } from "../../assets/objects/exit/exit";
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
-import { buttonVars, buttonLoad, createButton, addButtonOverlap, buttonUpdate } from "../../assets/objects/buttons/button";
+import { buttonLoad, createButton, addButtonOverlap, buttonUpdate } from "../../assets/objects/buttons/button";
 import { garageLoad, createGarage, garageUpdate } from "../../assets/objects/garage/garage";
-import { portalLoad, createPortal, joinPortals, portalVars, portalUpdate} from "../../assets/objects/portals/portal";
+import { portalLoad, createPortal, joinPortals, portalVars, portalUpdate } from "../../assets/objects/portals/portal";
 import resettingFunctionality from "../../util functions/resettingFunctionality";
 
 class LevelFour extends Phaser.Scene {
 	constructor() {
 		super(`Level Four`);
 		playerVars(this);
-		buttonVars(this);
 		portalVars(this);
 	}
 
 	preload() {
 		playerAnimPreload(this);
 		this.load.image("bg", levelOneBg);
+		this.isGarageOpen = false;
+		this.isExitUnlocked = false;
 
 		exitLoad(this);
 		platformLoad(this);
@@ -57,12 +58,14 @@ class LevelFour extends Phaser.Scene {
 		createPlatform(platforms, [1300, 550], [2, 0.6]);
 		createPlatform(platforms, [1000, 450], [2, 0.6]);
 		createPlatform(platforms, [1300, 350], [2, 0.6]);
-		createPlatform(platforms, [1000, 250], [2, 0.6]);
+		createPlatform(platforms, [900, 250], [4, 0.6]);
 		createPlatform(platforms, [100, 200], [7, 0.6]);
 		createPlatform(platforms, [100, 500], [7, 0.6]);
+		createPlatform(platforms, [900, 350], [.15, 9.5]);
+
 
 		//portals
-		this.portal1 = createPortal(this, `green`, 100, 550, `down`);
+		this.portal1 = createPortal(this, `green`, 400, 550, `down`);
 		this.portal2 = createPortal(this, `green`, 525, 80, `left`);
 		joinPortals(this, this.portal1, this.portal2, [this.player]);
 
@@ -76,15 +79,13 @@ class LevelFour extends Phaser.Scene {
 
 		//buttons
 		this.garageButton = createButton(this, 200, 490, 1, 1);
-    addButtonOverlap(this, this.garageButton, [this.player]);
+		addButtonOverlap(this, this.garageButton, [this.player]);
 
-    this.exitButton = createButton(this, 200, 190, 1, 1);
-    addButtonOverlap(this, this.exitButton, [this.player]);
-
-		
+		this.exitButton = createButton(this, 200, 190, 1, 1);
+		addButtonOverlap(this, this.exitButton, [this.player]);
 
 		//garage
-		this.garage = createGarage(this, [468, 1], [.3, 5], 'UP', 0.1);
+		this.garage = createGarage(this, [468, 1], [0.3, 5], "UP", 0.1);
 
 		//exit
 		this.exit1 = createExit(this, "Level Select", false, [400, 715], [2, 2], 4);
@@ -98,24 +99,23 @@ class LevelFour extends Phaser.Scene {
 		const layer = this.add.layer();
 		layer.add([this.player]);
 		layer.setDepth(1);
-
-		
 	}
 
 	update() {
 		playerControls(this);
 		playerAnimUpdate(this);
-		buttonUpdate(this);
+		buttonUpdate(this.garageButton);
+		buttonUpdate(this.exitButton);
 		portalUpdate(this);
 		resettingFunctionality(this);
 		garageUpdate(this.garage, this.isGarageOpen);
 		if (this.garageButton.isPressed) {
 			this.isGarageOpen = true;
-	}
-	if (this.exitButton.isPressed) {
+		}
+		if (this.exitButton.isPressed) {
 			this.isExitUnlocked = true;
-	}
-	exitUpdate(this.exit1, this.isExitUnlocked);
+		}
+		exitUpdate(this.exit1, this.isExitUnlocked);
 	}
 }
 
