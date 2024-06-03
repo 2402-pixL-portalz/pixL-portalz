@@ -8,6 +8,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //console.log("pressed");
     try {
       const result = await fetch('/api/v1/auth/register', {
         method: 'POST',
@@ -17,6 +18,7 @@ const Register = () => {
         body: JSON.stringify({ username, password }),
       });
 
+      // Check if the response is JSON
       if (result.headers.get('content-type')?.includes('application/json')) {
         const userData = await result.json();
         if (userData.token) {
@@ -26,7 +28,7 @@ const Register = () => {
           console.log('Error registering, no token received', userData);
         }
       } else {
-        console.log('Error: Response is not JSON');
+        console.log('Error: Response is not JSON'); // Receiving this response in console when attempting to register
       }
     } catch (error) {
       console.error('Error registering user', error);
@@ -35,7 +37,7 @@ const Register = () => {
 
   return (
     <div>
-      <h1>Register</h1>
+      <h1>Register An Account</h1>
       <form onSubmit={handleSubmit}>
         <label>Username: </label><br />
         <input
@@ -51,9 +53,9 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         /><br />
-        
-        <br></br> {/* quick CSS fix */}
-        <br></br> {/* quick CSS fix */}
+
+        <br></br> {/*added for quick css button placement alternative*/}
+        <br></br> {/*added for quick css button placement alternative*/}
         <button className="button registerPageButton">Register</button>
       </form>
     </div>
