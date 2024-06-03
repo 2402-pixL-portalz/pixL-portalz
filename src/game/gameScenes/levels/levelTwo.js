@@ -54,7 +54,7 @@ class LevelTwo extends Phaser.Scene {
 		addButtonOverlap(this, this.button, [this.player, this.box]);
 
 		//exit
-		this.exit1 = createExit(this, "Level Select", true, [1400, 750], [1, 1], 2);
+		this.exit1 = createExit(this, "Level Select", true, [1400, 750], [1, 1]);
 
 		this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
 
