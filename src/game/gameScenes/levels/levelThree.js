@@ -68,7 +68,7 @@ class LevelThree extends Phaser.Scene {
 		joinPortals(this, this.portal7, this.portal8, [this.player]);
 
 		//exit
-		this.exit1 = createExit(this, `Level Select`, true, [700, 300], [2, 2]);
+		this.exit1 = createExit(this, `Level Select`, true, [700, 300], [2, 2], 3);
 
 		this.entrance = createExit(this, `Level Select`, true, [50, 750], [1, 1]);
 
