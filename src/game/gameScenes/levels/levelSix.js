@@ -11,6 +11,7 @@ import { createPortal, joinPortals, portalLoad, portalUpdate } from "../../asset
 import { boxLoad, boxUpdate, createBox } from "../../assets/objects/box/box";
 import resettingFunctionality from "../../util functions/resettingFunctionality";
 import { addButtonOverlap, buttonLoad, buttonUpdate, createButton } from "../../assets/objects/buttons/button";
+import { rayCreate, rayLoad, rayUpdate } from "../../util functions/ray";
 
 class LevelSix extends Phaser.Scene {
 	constructor() {
@@ -30,6 +31,7 @@ class LevelSix extends Phaser.Scene {
 		portalLoad(this, `pink`);
 		boxLoad(this);
 		buttonLoad(this);
+		rayLoad(this);
 	}
 
 	create() {
@@ -104,6 +106,8 @@ class LevelSix extends Phaser.Scene {
 		//interact
 		this.physics.add.collider(this.player, platforms);
 
+		this.ray = rayCreate(this, this.box);
+
 		//layers
 		const layer = this.add.layer();
 		layer.add([this.box, this.player]);
@@ -121,6 +125,7 @@ class LevelSix extends Phaser.Scene {
 
 		portalUpdate(this);
 		boxUpdate(this.box);
+		rayUpdate(this.ray, this);
 
 		buttonUpdate(this.button1);
 		buttonUpdate(this.button2);
