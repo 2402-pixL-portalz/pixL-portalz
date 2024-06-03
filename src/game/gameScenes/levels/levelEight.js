@@ -8,15 +8,15 @@ import { exitLoad, createExit, exitUpdate } from "../../assets/objects/exit/exit
 import { playerAnimPreload, playerAnimCreate, playerAnimUpdate } from "../../util functions/playerAnims";
 import { rayLoad, rayCreate, rayUpdate } from "../../util functions/ray";
 import { boxLoad, boxUpdate, createBox } from "../../assets/objects/box/box";
-import { buttonLoad, createButton, buttonUpdate, buttonVars, addButtonOverlap } from "../../assets/objects/buttons/button";
+import { buttonLoad, createButton, buttonUpdate, addButtonOverlap } from "../../assets/objects/buttons/button";
 import { garageLoad, createGarage, garageUpdate } from "../../assets/objects/garage/garage";
 import { portalLoad, portalUpdate, portalVars, createPortal, joinPortals} from "../../assets/objects/portals/portal";
+import resettingFunctionality from "../../util functions/resettingFunctionality";
 
 class LevelEight extends Phaser.Scene {
 	constructor() {
 		super(`Level Eight`);
 		playerVars(this);
-		buttonVars(this);
 		portalVars(this);
 	}
 
@@ -43,10 +43,10 @@ class LevelEight extends Phaser.Scene {
 		bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
 		//player
-		this.player = this.physics.add.sprite(300, 700, "character").setScale(3, 3);
+		this.player = this.physics.add.sprite(300, 740, "character").setScale(3, 3);
 
 		this.player.setCollideWorldBounds(true);
-		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE`);
+		this.controls = this.input.keyboard.addKeys(`W,S,A,D,UP,DOWN,RIGHT,LEFT,SPACE,R`);
 
 		playerAnimCreate(this);
 
@@ -102,9 +102,9 @@ class LevelEight extends Phaser.Scene {
 
 
 
-		this.box1 = createBox(this, 420, 500, 1, 1, [this.player, this.box2, this.box3, platforms]);
-		this.box2 = createBox(this, 420, 600, 1, 1, [this.player, this.box1, this.box3, platforms]);
-		this.box3 = createBox(this, 1390, 300, 1, 1, [this.player, this.box1, this.box2, platforms]);
+		this.box1 = createBox(this, 420, 640, 1, 1, [this.player, this.box2, this.box3, platforms]);
+		this.box2 = createBox(this, 420, 730, 1, 1, [this.player, this.box1, this.box3, platforms]);
+		this.box3 = createBox(this, 1390, 430, 1, 1, [this.player, this.box1, this.box2, platforms]);
 
 		//garage
 		this.garage1 = createGarage(this,[1365,500], [.25,3], "UP",.03);
@@ -126,13 +126,16 @@ class LevelEight extends Phaser.Scene {
 	}
 
 	update() {
+		resettingFunctionality(this);
 		playerControls(this);
 		playerAnimUpdate(this);
 		rayUpdate(this.ray, this);
 		boxUpdate(this.box1);
 		boxUpdate(this.box2);
 		boxUpdate(this.box3);
-		buttonUpdate(this);
+		buttonUpdate(this.button1);
+		buttonUpdate(this.button2);
+		buttonUpdate(this.button3);
 		garageUpdate(this.garage1, this.button1.isPressed);
 		garageUpdate(this.garage2, this.button2.isPressed);
 		garageUpdate(this.garage3, !this.button3.isPressed);
