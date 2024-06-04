@@ -98,8 +98,6 @@ class LevelSelect extends Phaser.Scene {
 			setIsUnlocked(this.exit6, this.game.saveState[4]);
 			setIsUnlocked(this.exit7, this.game.saveState[5]);
 			setIsUnlocked(this.exit8, this.game.saveState[6]);
-			setIsUnlocked(this.exit9, this.game.saveState[7]);
-			setIsUnlocked(this.exit10, this.game.saveState[8]);
 		}
 
 		// console.log(`saveState, ${this.game.saveState}`);
